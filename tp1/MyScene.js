@@ -2,6 +2,8 @@ import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
 import { MyDiamond } from "./MyDiamond.js";
 import {MyTriangle} from "./MyTriangle.js";
 import {MyParallelogram} from "./MyParallelogram.js";
+import {MyTriangleSmall} from "./MyTriangleSmall.js";
+import {MyTriangleBig} from "./MyTriangleBig.js";
 
 /**
  * MyScene
@@ -27,15 +29,19 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.diamond = new MyDiamond(this);
-    this.triangle = new MyTriangle(this); //1.1
-    this.parallelogram = new MyParallelogram(this); //1.3 & 1.4
+    this.diamond = new MyDiamond(this);             //Diamond
+    this.triangle = new MyTriangle(this);           //Triangle       - 1.2
+    this.parallelogram = new MyParallelogram(this); //Parallelogram  - 1.4
+    this.triangleSmall = new MyTriangleSmall(this); //Small Triangle - 2
+    this.triangleBig = new MyTriangleBig(this);     //Big Triangle   - 2
 
     //Objects connected to MyInterface
     this.displayAxis = true;
-    this.displayTriangle = true; //1.1
-    this.displayDiamond = true; //1.2
-    this.displayParall = true; //1.3 & 1.4
+    this.displayTriangle = true;      //Triangle       - 1.1
+    this.displayDiamond = true;       //Diamond        - 1.2
+    this.displayParall = true;        //Parallelogram  - 1.4
+    this.displayTriangleSmall = true; //Small Triangle - 2
+    this.displayTriangleBig = true;   //Big Triangle   - 2
     this.scaleFactor = 1;
   }
   initLights() {
@@ -97,9 +103,11 @@ export class MyScene extends CGFscene {
     this.multMatrix(sca);
 
     // ---- BEGIN Primitive drawing section
-    if (this.displayTriangle) this.triangle.display(); //1.1
-    if (this.displayDiamond) this.diamond.display(); //1.2
-    if (this.displayParall) this.parallelogram.display(); //1.3
+    if (this.displayTriangle) this.triangle.display();            //Triangle       - 1.1
+    if (this.displayDiamond) this.diamond.display();              //Diamond        - 1.2
+    if (this.displayParall) this.parallelogram.display();         //Parallelogram  - 1.4
+    if (this.displayTriangleSmall) this.triangleSmall.display();  //Small Triangle - 2
+    if (this.displayTriangleBig) this.triangleBig.display();      //Big Triangle   - 2
     // ---- END Primitive drawing section
   }
 }
