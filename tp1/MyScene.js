@@ -72,10 +72,7 @@ export class MyScene extends CGFscene {
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
-    if (this.displayTriangle) this.triangle.display(); //1.1
-    if (this.displayDiamond) this.diamond.display(); //1.2
-    if (this.displayParall) this.parallelogram.display(); //1.3
-
+    
     this.setDefaultAppearance();
 
     var sca = [
@@ -100,7 +97,9 @@ export class MyScene extends CGFscene {
     this.multMatrix(sca);
 
     // ---- BEGIN Primitive drawing section
-
+    if (this.displayTriangle) this.triangle.display(); //1.1
+    if (this.displayDiamond) this.diamond.display(); //1.2
+    if (this.displayParall) this.parallelogram.display(); //1.3
     // ---- END Primitive drawing section
   }
 }
