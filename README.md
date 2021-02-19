@@ -1,9 +1,9 @@
 # CGRA 2020/2021
 
-## Group T0xG0y
+## Group T05G03
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| Afonso Monteiro | 201907284 | up201907284@fe.up.pt |
+| Mário Travassos | 201905871 | up201905871@fe.up.pt |
 
 ----
