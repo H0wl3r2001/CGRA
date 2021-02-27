@@ -167,6 +167,8 @@ export class MyScene extends CGFscene {
     this.rotate(Math.PI/2,0,0,1);
 
     if(this.displayTriangleSmall1) this.triangleSmall1.display();
+
+    this.popMatrix();
     
     // ---- END Primitive drawing section
   }
