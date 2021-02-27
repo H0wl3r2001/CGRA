@@ -41,11 +41,13 @@ export class MyScene extends CGFscene {
 
     //Objects connected to MyInterface
     this.displayAxis = true;
-    this.displayTriangle = true;      //Triangle       - 1.1
-    this.displayDiamond = true;       //Diamond        - 1.2
-    this.displayParall = true;        //Parallelogram  - 1.4
-    this.displayTriangleSmall = true; //Small Triangle - 2
-    this.displayTriangleBig = true;   //Big Triangle   - 2
+    this.displayTriangle = true;      
+    this.displayDiamond = true;       
+    this.displayParall = true;        
+    this.displayTriangleSmall1 = true;
+    this.displayTriangleSmall2 = true; 
+    this.displayTriangleBig1 = true;
+    this.displayTriangleBig2 = true;   
     this.scaleFactor = 1;
   }
   initLights() {
@@ -108,7 +110,7 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
   
-
+    //diamond head
     //this.translate(-Math.SQRT2/2, Math.SQRT2/2, 0);
     this.pushMatrix();
 
@@ -136,6 +138,20 @@ export class MyScene extends CGFscene {
     if (this.displayDiamond) this.diamond.display();              //Diamond
 
     this.popMatrix();
+
+    //1st ear - parallelogram
+    
+    this.translate(0,2*Math.SQRT2,0);
+
+    this.rotate(Math.PI,0,1,0);
+    this.rotate(Math.PI/4,0,0,1);
+
+    if(this.displayParall) this.parallelogram.display();
+
+    //2nd ear - triangle
+
+    //this.rotate(Math.PI/2,0,0,1);
+    //if(this.displayTriangle) this.triangle.display();
 
     // ---- END Primitive drawing section
   }
