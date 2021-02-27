@@ -111,7 +111,6 @@ export class MyScene extends CGFscene {
     // ---- BEGIN Primitive drawing section
   
     //diamond head
-    //this.translate(-Math.SQRT2/2, Math.SQRT2/2, 0);
     this.pushMatrix();
 
     var m_trans = [
@@ -133,14 +132,14 @@ export class MyScene extends CGFscene {
 
     this.multMatrix(m_rot);
     
-		//this.rotate(Math.PI/4, 0, 0, 1);
 
-    if (this.displayDiamond) this.diamond.display();              //Diamond
+    if (this.displayDiamond) this.diamond.display();
 
     this.popMatrix();
 
     //1st ear - parallelogram
-    
+    this.pushMatrix();
+
     this.translate(0,2*Math.SQRT2,0);
 
     this.rotate(Math.PI,0,1,0);
@@ -148,11 +147,27 @@ export class MyScene extends CGFscene {
 
     if(this.displayParall) this.parallelogram.display();
 
+    this.popMatrix();
+
     //2nd ear - triangle
+    this.pushMatrix();
 
-    //this.rotate(Math.PI/2,0,0,1);
-    //if(this.displayTriangle) this.triangle.display();
+    this.translate(2*Math.SQRT2/3,8*Math.SQRT2/3,0);
+    this.scale(2/3,2/3,2/3);
+    this.rotate(-3*Math.PI/4,0,0,1);
+    if(this.displayTriangle) this.triangle.display();
 
+    this.popMatrix();
+
+    //arm - 1st small triangle
+
+    this.pushMatrix();
+
+    this.translate(0,1-3*Math.SQRT2/8,0);
+    this.rotate(Math.PI/2,0,0,1);
+
+    if(this.displayTriangleSmall1) this.triangleSmall1.display();
+    
     // ---- END Primitive drawing section
   }
 }
