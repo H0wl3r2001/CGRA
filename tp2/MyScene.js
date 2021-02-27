@@ -3,7 +3,6 @@ import { MyDiamond } from "./MyDiamond.js";
 import {MyTriangle} from "./MyTriangle.js";
 import {MyParallelogram} from "./MyParallelogram.js";
 import {MyTriangleSmall} from "./MyTriangleSmall.js";
-import {MyTriangleBig} from "./MyTriangleBig.js";
 
 
 
@@ -31,24 +30,27 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.diamond = new MyDiamond(this);             
-    this.triangle = new MyTriangle(this);           
-    this.parallelogram = new MyParallelogram(this);
-    this.triangleSmall1 = new MyTriangleSmall(this);
-    this.triangleSmall2 = new MyTriangleSmall(this);
-    this.triangleBig1 = new MyTriangleBig(this);
-    this.triangleBig2 = new MyTriangleBig(this);     
+
+    this.diamond = new MyDiamond(this);               //head        
+    this.parallelogram = new MyParallelogram(this);   //left ear  
+    this.triangle = new MyTriangle(this);             //right ear
+    this.triangleSmall1 = new MyTriangleSmall(this);  //Arm 1
+    this.triangleSmall2 = new MyTriangleSmall(this);  //Arm 2
+    this.triangleBig1 = new MyTriangle(this);      //Leg 1
+    this.triangleBig2 = new MyTriangle(this);      //Leg 2
 
     //Objects connected to MyInterface
     this.displayAxis = true;
-    this.displayTriangle = true;      
-    this.displayDiamond = true;       
-    this.displayParall = true;        
+
+    this.displayDiamond = true;
+    this.displayTriangle = true;
+    this.displayParall = true;
     this.displayTriangleSmall1 = true;
     this.displayTriangleSmall2 = true; 
     this.displayTriangleBig1 = true;
-    this.displayTriangleBig2 = true;   
+    this.displayTriangleBig2 = true;
     this.scaleFactor = 1;
+
   }
   initLights() {
     this.lights[0].setPosition(15, 2, 5, 1);
@@ -137,7 +139,7 @@ export class MyScene extends CGFscene {
 
     this.popMatrix();
 
-    //1st ear - parallelogram
+    //left ear - parallelogram
     this.pushMatrix();
 
     this.translate(0,2*Math.SQRT2,0);
@@ -149,7 +151,7 @@ export class MyScene extends CGFscene {
 
     this.popMatrix();
 
-    //2nd ear - triangle
+    //right ear - triangle
     this.pushMatrix();
 
     this.translate(2*Math.SQRT2/3,8*Math.SQRT2/3,0);
@@ -167,6 +169,36 @@ export class MyScene extends CGFscene {
     this.rotate(Math.PI/2,0,0,1);
 
     if(this.displayTriangleSmall1) this.triangleSmall1.display();
+
+    this.popMatrix();
+
+    //arm - 2nd small triangle
+    this.pushMatrix();
+
+    this.translate(-1,-3*Math.SQRT2/8,0);
+    this.rotate(-Math.PI/2,0,0,1);
+
+    if(this.displayTriangleSmall2) this.triangleSmall2.display();
+
+    this.popMatrix();
+
+    //Leg 1 - 1st big triangle
+    this.pushMatrix();
+
+    this.translate(0, -1/3*Math.SQRT2, 0);
+    this.rotate(-Math.PI/2,0,0,1);
+
+    if(this.displayTriangleBig1) this.triangleBig1.display();
+
+    this.popMatrix();
+
+    //Leg 2 - 2nd big triangle
+    this.pushMatrix();
+    
+    this.translate(0.45*Math.SQRT2, -1.3*Math.SQRT2,0);
+    this.rotate(-3/4*Math.PI,0,0,1);
+
+    if(this.displayTriangleBig2) this.triangleBig2.display();
 
     this.popMatrix();
     
