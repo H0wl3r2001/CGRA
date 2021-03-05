@@ -132,7 +132,7 @@ export class MyScene extends CGFscene {
     //    Exercise 3 and 4
     this.pushMatrix();
     
-    this.translate(0.5,-0.5,0.5);
+    this.translate(0.5,-0.6,0.5);
     this.scale(6, 1, 12);
 
     //    Exercise 3

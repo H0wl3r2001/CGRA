@@ -10,25 +10,14 @@ import {MyTriangleSmall} from "./MyTriangleSmall.js";
  */
 export class MyTangram extends CGFobject{
     constructor(scene) {
-        // this.diamond = new MyDiamond(this);               //head        
-        // this.parallelogram = new MyParallelogram(this);   //left ear  
-        // this.triangle = new MyTriangle(this);             //right ear
-        // this.triangleSmall1 = new MyTriangleSmall(this);  //Arm 1
-        // this.triangleSmall2 = new MyTriangleSmall(this);  //Arm 2
-        // this.triangleBig1 = new MyTriangle(this);      //Leg 1
-        // this.triangleBig2 = new MyTriangle(this);      //Leg 2
 		super(scene);
-		this.initBuffers(scene);
-	}
-
-    display(scene){
+        
         this.diamond = new MyDiamond(scene);               //head        
         this.parallelogram = new MyParallelogram(scene);   //left ear  
         this.triangle = new MyTriangle(scene);             //right ear
-        this.triangleSmall1 = new MyTriangleSmall(scene);  //Arm 1
-        this.triangleSmall2 = new MyTriangleSmall(scene);  //Arm 2
-        this.triangleBig1 = new MyTriangle(scene);      //Leg 1
-        this.triangleBig2 = new MyTriangle(scene);      //Leg 2
+	}
+
+    display(scene){
 
         //diamond head
         scene.pushMatrix();
@@ -79,33 +68,34 @@ export class MyTangram extends CGFobject{
         scene.popMatrix();
 
         //arm - 1st small triangle
-
         scene.pushMatrix();
-
-        scene.translate(0,1-3*Math.SQRT2/8,0);
+        
+        scene.scale(0.5,0.5,1);
+        scene.translate(0,0.9,0);
         scene.rotate(Math.PI/2,0,0,1);
 
-        this.triangleSmall1.display();
+        this.triangle.display();
 
         scene.popMatrix();
 
         //arm - 2nd small triangle
         scene.pushMatrix();
-
-        scene.translate(-1,-3*Math.SQRT2/8,0);
+        
+        scene.scale(0.5,0.5,1);
+        scene.translate(-2,-1.1,0);
         scene.rotate(-Math.PI/2,0,0,1);
 
-        this.triangleSmall2.display();
+        this.triangle.display();
 
         scene.popMatrix();
 
         //Leg 1 - 1st big triangle
         scene.pushMatrix();
-
+        
         scene.translate(0, -1/3*Math.SQRT2, 0);
         scene.rotate(-Math.PI/2,0,0,1);
 
-        this.triangleBig1.display();
+        this.triangle.display();
 
         scene.popMatrix();
 
@@ -115,7 +105,7 @@ export class MyTangram extends CGFobject{
         scene.translate(0.45*Math.SQRT2, -1.3*Math.SQRT2,0);
         scene.rotate(-3/4*Math.PI,0,0,1);
 
-        this.triangleBig2.display();
+        this.triangle.display();
 
         scene.popMatrix();
     }

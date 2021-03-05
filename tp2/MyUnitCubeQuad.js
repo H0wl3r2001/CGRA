@@ -8,11 +8,11 @@ import {    MyQuad  } from './MyQuad.js';
 export class MyUnitCubeQuad extends CGFobject{
     constructor(scene){
 		super(scene);
-		this.initBuffers(scene);
+
+    this.square = new MyQuad(scene);
     }
 
     display(scene){
-        this.square = new MyQuad(scene);
 
         //Positive y face
         scene.pushMatrix();
