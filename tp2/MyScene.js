@@ -109,9 +109,13 @@ export class MyScene extends CGFscene {
     this.rotate(3*Math.PI/2,1,0,0);
 
     if(this.displayTangram) this.trangram.display(this);
+    this.popMatrix();
 
-    //this.pushMatrix();
-    this.translate(0,0,-0.5);
+    this.pushMatrix();
+
+    
+    this.translate(0.5,-0.5,0.5);
+    this.scale(6, 1, 12);
 
     if(this.displayCube) this.cube.display();
 
