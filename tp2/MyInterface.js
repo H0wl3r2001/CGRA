@@ -24,9 +24,15 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
 
         //Object checkbox elements in GUI
-        
+
+        //      Exercise 2
         this.gui.add(this.scene, 'displayTangram').name('Display Tangram');
+        
+        //      Exercise 3
         this.gui.add(this.scene, 'displayCube').name('Our cube');
+
+        //      Exercise 4
+        this.gui.add(this.scene, 'displayUnitCubeQuad').name('Display ex 4 cube');
         return true;
     }
 }
