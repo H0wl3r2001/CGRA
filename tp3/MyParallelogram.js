@@ -26,7 +26,9 @@ export class MyParallelogram extends CGFobject
         this.indices = 
         [
             2,0,1,
-            1,3,2
+            1,3,2,
+            2,3,1,
+            1,0,2
         ];
 
 		//The defined indices (and corresponding vertices)

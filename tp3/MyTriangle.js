@@ -24,7 +24,8 @@ export class MyTriangle extends CGFobject
 
         this.indices = 
         [
-            0,1,2
+            0,1,2,
+            2,1,0
         ];
 
 		//The defined indices (and corresponding vertices)
