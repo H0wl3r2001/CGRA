@@ -8,51 +8,49 @@ import {    MyQuad  } from './MyQuad.js';
 export class MyUnitCubeQuad extends CGFobject{
     constructor(scene){
 		super(scene);
-		this.initBuffers(scene);
+    this.square = new MyQuad(scene);
     }
 
-    display(scene){
-        this.square = new MyQuad(scene);
-
+    display(){
         //Positive y face
-        scene.pushMatrix();
-        scene.translate(0, 0.5, 0);
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0.5, 0);
         this.square.display();
-        scene.popMatrix();
+        this.scene.popMatrix();
 
         //Negative y face
-        scene.pushMatrix();
-        scene.translate(0, -0.5, 0);
-        scene.rotate(Math.PI, 1, 0, 0);
+        this.scene.pushMatrix();
+        this.scene.translate(0, -0.5, 0);
+        this.scene.rotate(Math.PI, 1, 0, 0);
         this.square.display();
-        scene.popMatrix();
+        this.scene.popMatrix();
         
         //Negative x face
-        scene.pushMatrix();
-        scene.translate(-0.5,0,0);
-        scene.rotate(Math.PI/2,0,0,1);
+        this.scene.pushMatrix();
+        this.scene.translate(-0.5,0,0);
+        this.scene.rotate(Math.PI/2,0,0,1);
         this.square.display();
-        scene.popMatrix();
+        this.scene.popMatrix();
 
         //Positive x face
-        scene.pushMatrix();
-        scene.translate(0.5,0,0);
-        scene.rotate(-Math.PI/2,0,0,1);
+        this.scene.pushMatrix();
+        this.scene.translate(0.5,0,0);
+        this.scene.rotate(-Math.PI/2,0,0,1);
         this.square.display();
-        scene.popMatrix();
+        this.scene.popMatrix();
 
         //Negative z face
-        scene.pushMatrix();
-        scene.translate(0, 0, -0.5);
-        scene.rotate(-Math.PI/2,1,0,0);
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0, -0.5);
+        this.scene.rotate(-Math.PI/2,1,0,0);
         this.square.display();
-        scene.popMatrix();
+        this.scene.popMatrix();
 
         //Positive z face
-        scene.pushMatrix();
-        scene.translate(0, 0, 0.5);
-        scene.rotate(Math.PI/2,1,0,0);
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0, 0.5);
+        this.scene.rotate(Math.PI/2,1,0,0);
         this.square.display();
-        scene.popMatrix();
+        this.scene.popMatrix();
     }
 }

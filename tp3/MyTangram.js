@@ -10,18 +10,8 @@ import {MyTriangleSmall} from "./MyTriangleSmall.js";
  */
 export class MyTangram extends CGFobject{
     constructor(scene) {
-        // this.diamond = new MyDiamond(this);               //head        
-        // this.parallelogram = new MyParallelogram(this);   //left ear  
-        // this.triangle = new MyTriangle(this);             //right ear
-        // this.triangleSmall1 = new MyTriangleSmall(this);  //Arm 1
-        // this.triangleSmall2 = new MyTriangleSmall(this);  //Arm 2
-        // this.triangleBig1 = new MyTriangle(this);      //Leg 1
-        // this.triangleBig2 = new MyTriangle(this);      //Leg 2
 		super(scene);
 		this.initBuffers(scene);
-	}
-
-    display(scene){
         this.diamond = new MyDiamond(scene);               //head        
         this.parallelogram = new MyParallelogram(scene);   //left ear  
         this.triangle = new MyTriangle(scene);             //right ear
@@ -29,9 +19,11 @@ export class MyTangram extends CGFobject{
         this.triangleSmall2 = new MyTriangleSmall(scene);  //Arm 2
         this.triangleBig1 = new MyTriangle(scene);      //Leg 1
         this.triangleBig2 = new MyTriangle(scene);      //Leg 2
+	}
 
+    display(){
         //diamond head
-        scene.pushMatrix();
+        this.scene.pushMatrix();
 
         var m_trans = [
         1,0,0,0,
@@ -40,7 +32,7 @@ export class MyTangram extends CGFobject{
         -Math.SQRT2/2, 3*Math.SQRT2/2,0,1
         ]
 
-        scene.multMatrix(m_trans);
+        this.scene.multMatrix(m_trans);
 
         var m_rot = 
         [
@@ -50,73 +42,73 @@ export class MyTangram extends CGFobject{
         0,0,0,1
         ]
 
-        scene.multMatrix(m_rot);
+        this.scene.multMatrix(m_rot);
     
         this.diamond.display();
 
-        scene.popMatrix();
+        this.scene.popMatrix();
 
         //left ear - parallelogram
-        scene.pushMatrix();
+        this.scene.pushMatrix();
 
-        scene.translate(0,2*Math.SQRT2,0);
+        this.scene.translate(0,2*Math.SQRT2,0);
 
-        scene.rotate(Math.PI,0,1,0);
-        scene.rotate(Math.PI/4,0,0,1);
+        this.scene.rotate(Math.PI,0,1,0);
+        this.scene.rotate(Math.PI/4,0,0,1);
 
         this.parallelogram.display();
 
-        scene.popMatrix();
+        this.scene.popMatrix();
 
         //right ear - triangle
-        scene.pushMatrix();
+        this.scene.pushMatrix();
 
-        scene.translate(2*Math.SQRT2/3,8*Math.SQRT2/3,0);
-        scene.scale(2/3,2/3,2/3);
-        scene.rotate(-3*Math.PI/4,0,0,1);
+        this.scene.translate(2*Math.SQRT2/3,8*Math.SQRT2/3,0);
+        this.scene.scale(2/3,2/3,2/3);
+        this.scene.rotate(-3*Math.PI/4,0,0,1);
         this.triangle.display();
         
-        scene.popMatrix();
+        this.scene.popMatrix();
 
         //arm - 1st small triangle
 
-        scene.pushMatrix();
+        this.scene.pushMatrix();
 
-        scene.translate(0,1-3*Math.SQRT2/8,0);
-        scene.rotate(Math.PI/2,0,0,1);
+        this.scene.translate(0,1-3*Math.SQRT2/8,0);
+        this.scene.rotate(Math.PI/2,0,0,1);
 
         this.triangleSmall1.display();
 
-        scene.popMatrix();
+        this.scene.popMatrix();
 
         //arm - 2nd small triangle
-        scene.pushMatrix();
+        this.scene.pushMatrix();
 
-        scene.translate(-1,-3*Math.SQRT2/8,0);
-        scene.rotate(-Math.PI/2,0,0,1);
+        this.scene.translate(-1,-3*Math.SQRT2/8,0);
+        this.scene.rotate(-Math.PI/2,0,0,1);
 
         this.triangleSmall2.display();
 
-        scene.popMatrix();
+        this.scene.popMatrix();
 
         //Leg 1 - 1st big triangle
-        scene.pushMatrix();
+        this.scene.pushMatrix();
 
-        scene.translate(0, -1/3*Math.SQRT2, 0);
-        scene.rotate(-Math.PI/2,0,0,1);
+        this.scene.translate(0, -1/3*Math.SQRT2, 0);
+        this.scene.rotate(-Math.PI/2,0,0,1);
 
         this.triangleBig1.display();
 
-        scene.popMatrix();
+        this.scene.popMatrix();
 
         //Leg 2 - 2nd big triangle
-        scene.pushMatrix();
+        this.scene.pushMatrix();
         
-        scene.translate(0.45*Math.SQRT2, -1.3*Math.SQRT2,0);
-        scene.rotate(-3/4*Math.PI,0,0,1);
+        this.scene.translate(0.45*Math.SQRT2, -1.3*Math.SQRT2,0);
+        this.scene.rotate(-3/4*Math.PI,0,0,1);
 
         this.triangleBig2.display();
 
-        scene.popMatrix();
+        this.scene.popMatrix();
     }
 }
