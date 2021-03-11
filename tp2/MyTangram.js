@@ -11,14 +11,10 @@ import {MyTriangleSmall} from "./MyTriangleSmall.js";
 export class MyTangram extends CGFobject{
     constructor(scene) {
 		super(scene);
-		this.initBuffers(scene);
+        
         this.diamond = new MyDiamond(scene);               //head        
         this.parallelogram = new MyParallelogram(scene);   //left ear  
         this.triangle = new MyTriangle(scene);             //right ear
-        this.triangleSmall1 = new MyTriangleSmall(scene);  //Arm 1
-        this.triangleSmall2 = new MyTriangleSmall(scene);  //Arm 2
-        this.triangleBig1 = new MyTriangle(scene);      //Leg 1
-        this.triangleBig2 = new MyTriangle(scene);      //Leg 2
 	}
 
     display(){
@@ -71,13 +67,11 @@ export class MyTangram extends CGFobject{
         this.scene.popMatrix();
 
         //arm - 1st small triangle
-
         this.scene.pushMatrix();
         
         this.scene.scale(0.5,0.5,1);
         this.scene.translate(0,0.9,0);
         this.scene.rotate(Math.PI/2,0,0,1);
-
 
         this.triangle.display();
 
