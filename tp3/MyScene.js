@@ -155,6 +155,7 @@ export class MyScene extends CGFscene {
         // Labels and ID's for object selection on MyInterface
         this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Wood Low Specular': 3, 'Custom': 4 };
     }
+    
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene

@@ -90,7 +90,7 @@ export class MyTangram extends CGFobject{
         ]
         this.scene.multMatrix(m_rot);
         
-        this.greenSpec.apply();
+        this.scene.customMaterial.apply();
 
         this.diamond.display();
 
