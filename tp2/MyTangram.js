@@ -2,7 +2,6 @@ import {CGFobject, CGFscene} from '../lib/CGF.js';
 import { MyDiamond } from "./MyDiamond.js";
 import {MyTriangle} from "./MyTriangle.js";
 import {MyParallelogram} from "./MyParallelogram.js";
-import {MyTriangleSmall} from "./MyTriangleSmall.js";
 /**
  * MyTangram - Bunny
  * @constructor
