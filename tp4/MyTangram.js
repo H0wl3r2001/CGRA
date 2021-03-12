@@ -10,65 +10,11 @@ import { MyParallelogram } from "./MyParallelogram.js";
 export class MyTangram extends CGFobject{
     constructor(scene) {
 		super(scene);
-        this.initMaterials(scene);
         
         this.diamond = new MyDiamond(scene);               //head        
         this.parallelogram = new MyParallelogram(scene);   //left ear  
         this.triangle = new MyTriangle(scene);             //right ear
 	}
-
-    initMaterials(scene) {
-        //All are specular materials
-
-        // Green Specular
-        this.greenSpec = new CGFappearance(scene);
-        this.greenSpec.setAmbient(0, 1, 0, 1.0);
-        this.greenSpec.setDiffuse(0.2, 0.2, 0.2, 1.0);
-        this.greenSpec.setSpecular(0.7, 0.7, 0, 1.0);
-        this.greenSpec.setShininess(1.0);
-
-        // Yellow Specular
-        this.yellowSpec = new CGFappearance(scene);
-        this.yellowSpec.setAmbient(1, 1, 0, 1.0);
-        this.yellowSpec.setDiffuse(0.2, 0.2, 0.2, 1.0);
-        this.yellowSpec.setSpecular(0.7, 0.7, 0, 1.0);
-        this.yellowSpec.setShininess(1.0);
-
-        // Pink Specular
-        this.pinkSpec = new CGFappearance(scene);
-        this.pinkSpec.setAmbient(1, 0.6, 0.8, 1.0);
-        this.pinkSpec.setDiffuse(0.2, 0.2, 0.2, 1.0);
-        this.pinkSpec.setSpecular(0.7, 0.7, 0, 1.0);
-        this.pinkSpec.setShininess(1.0);
-
-        // Purple Specular
-        this.purpleSpec = new CGFappearance(scene);
-        this.purpleSpec.setAmbient(0.5, 0, 0.5, 1.0);
-        this.purpleSpec.setDiffuse(0.2, 0.2, 0.2, 1.0);
-        this.purpleSpec.setSpecular(0.7, 0.7, 0, 1.0);
-        this.purpleSpec.setShininess(1.0);
-
-        // Red Specular
-        this.redSpec = new CGFappearance(scene);
-        this.redSpec.setAmbient(1, 0, 0, 1.0);
-        this.redSpec.setDiffuse(0.2, 0.2, 0.2, 1.0);
-        this.redSpec.setSpecular(0.7, 0.7, 0, 1.0);
-        this.redSpec.setShininess(1.0);
-
-        // Orange Specular
-        this.orangeSpec = new CGFappearance(scene);
-        this.orangeSpec.setAmbient(1, 0.6, 0, 1.0);
-        this.orangeSpec.setDiffuse(0.2, 0.2, 0.2, 1.0);
-        this.orangeSpec.setSpecular(0.7, 0.7, 0, 1.0);
-        this.orangeSpec.setShininess(1.0);
-
-        // Blue Specular
-        this.blueSpec = new CGFappearance(scene);
-        this.blueSpec.setAmbient(0, 0, 1, 1.0);
-        this.blueSpec.setDiffuse(0.2, 0.2, 0.2, 1.0);
-        this.blueSpec.setSpecular(0.7, 0.7, 0, 1.0);
-        this.blueSpec.setShininess(1.0);
-    }
 
     display(){
         //diamond head
@@ -89,8 +35,6 @@ export class MyTangram extends CGFobject{
         0,0,0,1
         ]
         this.scene.multMatrix(m_rot);
-        
-        this.scene.customMaterial.apply();
 
         this.diamond.display();
 
@@ -103,7 +47,6 @@ export class MyTangram extends CGFobject{
         this.scene.rotate(Math.PI,0,1,0);
         this.scene.rotate(Math.PI/4,0,0,1);
 
-        this.yellowSpec.apply();
         this.parallelogram.display();
 
         this.scene.popMatrix();
@@ -115,7 +58,6 @@ export class MyTangram extends CGFobject{
         this.scene.scale(2/3,2/3,2/3);
         this.scene.rotate(-3*Math.PI/4,0,0,1);
 
-        this.pinkSpec.apply();
         this.triangle.display();
         
         this.scene.popMatrix();
@@ -127,7 +69,6 @@ export class MyTangram extends CGFobject{
         this.scene.translate(0,0.9,0);
         this.scene.rotate(Math.PI/2,0,0,1);
         
-        this.purpleSpec.apply();
         this.triangle.display();
 
         this.scene.popMatrix();
@@ -139,7 +80,6 @@ export class MyTangram extends CGFobject{
         this.scene.translate(-2,-1.1,0);
         this.scene.rotate(-Math.PI/2,0,0,1);
 
-        this.redSpec.apply();
         this.triangle.display();
 
         this.scene.popMatrix();
@@ -150,7 +90,6 @@ export class MyTangram extends CGFobject{
         this.scene.translate(0, -1/3*Math.SQRT2, 0);
         this.scene.rotate(-Math.PI/2,0,0,1);
 
-        this.orangeSpec.apply();
         this.triangle.display();
 
         this.scene.popMatrix();
@@ -161,21 +100,8 @@ export class MyTangram extends CGFobject{
         this.scene.translate(0.45*Math.SQRT2, -1.3*Math.SQRT2,0);
         this.scene.rotate(-3/4*Math.PI,0,0,1);
 
-        this.blueSpec.apply();
         this.triangle.display();
 
         this.scene.popMatrix();
-    }
-
-    enableNormalViz(){
-        this.triangle.enableNormalViz();
-        this.diamond.enableNormalViz();
-        this.parallelogram.enableNormalViz();
-    }
-
-    disableNormalViz(){
-        this.triangle.disableNormalViz();
-        this.diamond.disableNormalViz();
-        this.parallelogram.disableNormalViz();
     }
 }
