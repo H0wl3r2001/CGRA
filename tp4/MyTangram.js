@@ -16,7 +16,15 @@ export class MyTangram extends CGFobject{
         this.triangle = new MyTriangle(scene);             //right ear
 
         this.triangleCoords = [
-            //medium triangle is the default
+            //medium triangle
+            [
+                0.5,    1,
+                0,      0.5,
+                0,      1,
+                0,      0.5,
+                0.5,    1,
+                0,      1
+            ],
 
             //small triangle 1
             [
@@ -102,6 +110,7 @@ export class MyTangram extends CGFobject{
         this.scene.scale(2/3,2/3,2/3);
         this.scene.rotate(-3*Math.PI/4,0,0,1);
 
+        this.triangle.updateTexCoords(this.triangleCoords[0]);
         this.triangle.display();
         this.scene.popMatrix();
 
@@ -112,7 +121,7 @@ export class MyTangram extends CGFobject{
         this.scene.translate(0,0.9,0);
         this.scene.rotate(Math.PI/2,0,0,1);
         
-        this.triangle.updateTexCoords(this.triangleCoords[0]);
+        this.triangle.updateTexCoords(this.triangleCoords[1]);
         this.triangle.display();
 
         this.scene.popMatrix();
@@ -124,7 +133,7 @@ export class MyTangram extends CGFobject{
         this.scene.translate(-2,-1.1,0);
         this.scene.rotate(-Math.PI/2,0,0,1);
 
-        this.triangle.updateTexCoords(this.triangleCoords[1]);
+        this.triangle.updateTexCoords(this.triangleCoords[2]);
         this.triangle.display();
 
         this.scene.popMatrix();
@@ -135,7 +144,7 @@ export class MyTangram extends CGFobject{
         this.scene.translate(0, -1/3*Math.SQRT2, 0);
         this.scene.rotate(-Math.PI/2,0,0,1);
 
-        this.triangle.updateTexCoords(this.triangleCoords[2]);
+        this.triangle.updateTexCoords(this.triangleCoords[3]);
         this.triangle.display();
 
         this.scene.popMatrix();
@@ -146,7 +155,7 @@ export class MyTangram extends CGFobject{
         this.scene.translate(0.45*Math.SQRT2, -1.3*Math.SQRT2,0);
         this.scene.rotate(-3/4*Math.PI,0,0,1);
 
-        this.triangle.updateTexCoords(this.triangleCoords[3]);
+        this.triangle.updateTexCoords(this.triangleCoords[4]);
         this.triangle.display();
 
         this.scene.popMatrix();
