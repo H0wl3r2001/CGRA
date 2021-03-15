@@ -1,7 +1,6 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyQuad } from "./MyQuad.js";
 import { MyTangram } from "./MyTangram.js";
-import { MyDiamond } from "./MyDiamond.js";
 
 /**
  * MyScene
@@ -30,7 +29,6 @@ export class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
         this.tangram = new MyTangram(this);
-        this.diamond = new MyDiamond(this);
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -61,7 +59,7 @@ export class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayQuad = true;
         this.displayTangram = false;
-        this.displayDiamond = false;
+
         this.scaleFactor = 5;
         this.selectedTexture = -1;        
         this.wrapS = 0;
@@ -136,9 +134,6 @@ export class MyScene extends CGFscene {
             this.quadMaterial.apply();
         
         if(this.displayTangram)
-            // this.tangramMat.apply();
-        
-        if(this.displayDiamond)
             this.tangramMat.apply();
 
         // Default texture filtering in WebCGF is LINEAR. 
@@ -152,9 +147,6 @@ export class MyScene extends CGFscene {
 
         if(this.displayTangram)
             this.tangram.display();
-
-        if(this.displayDiamond)
-            this.diamond.display();
 
         // ---- END Primitive drawing section
     }
