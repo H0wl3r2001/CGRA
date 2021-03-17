@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/
 import { MyQuad } from "./MyQuad.js";
 import { MyTangram } from "./MyTangram.js";
 import { MyTriangle } from "./MyTriangle.js";
+import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
 
 /**
  * MyScene
@@ -54,12 +55,18 @@ export class MyScene extends CGFscene {
         this.texture1 = new CGFtexture(this, 'images/board.jpg');
         this.texture2 = new CGFtexture(this, 'images/floor.png');
         this.texture3 = new CGFtexture(this, 'images/window.jpg');
+        this.texSide = new CGFtexture(this, 'images/mineSide.png');
+        this.texTop = new CGFtexture(this, 'images/mineTop.png');
+        this.texBott = new CGFtexture(this, 'images/mineBottom.png');
         //-------
+
+        this.cubeQuad = new MyUnitCubeQuad(this, this.texSide, this.texBott, this.texTop);
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
         this.displayQuad = true;
         this.displayTangram = false;
+        this.displayCube = false;
 
         this.scaleFactor = 5;
         this.selectedTexture = -1;        
@@ -148,6 +155,9 @@ export class MyScene extends CGFscene {
 
         if(this.displayTangram)
             this.tangram.display();
+
+        if(this.displayCube)
+            this.cubeQuad.display();
 
         // ---- END Primitive drawing section
     }
