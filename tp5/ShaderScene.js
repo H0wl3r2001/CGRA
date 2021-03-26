@@ -77,6 +77,9 @@ export class ShaderScene extends CGFscene {
 
 		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");
 
+		this.waterTex = new CGFtexture(this, "textures/waterTex.jpg");
+		this.waterMap = new CGFtexture(this, "textures/waterMap.jpg");
+
 		// shaders initialization
 
 		this.testShaders = [
@@ -90,7 +93,8 @@ export class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag"),
 			new CGFshader(this.gl, "shaders/blueYellow.vert", "shaders/blueYellow.frag"),
-			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/grayScale.frag")
+			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/grayScale.frag"),
+			new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag")
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
@@ -98,6 +102,7 @@ export class ShaderScene extends CGFscene {
 		this.testShaders[5].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
+		this.testShaders[11].setUniformsValues({ uSampler2: 1 });
 
 
 		// Shaders interface variables
@@ -113,7 +118,8 @@ export class ShaderScene extends CGFscene {
 			'Sepia': 7,
 			'Convolution': 8,
 			'Blue & Yellow': 9,
-			'Gray': 10
+			'Gray': 10,
+			'Water Shader': 11
 		};
 
 		// shader code panels references
@@ -221,6 +227,13 @@ export class ShaderScene extends CGFscene {
 		// Draw axis
 		this.axis.display();
 
+		if(this.selectedExampleShader == 11){
+		    this.appearance.setTexture(this.waterTex);
+		}
+		else{
+			this.appearance.setTexture(this.texture);
+		}
+
 		// aplly main appearance (including texture in default texture unit 0)
 		this.appearance.apply();
 
@@ -229,7 +242,12 @@ export class ShaderScene extends CGFscene {
 		this.pushMatrix();
 
 		// bind additional texture to texture unit 1
-		this.texture2.bind(1);
+		if(this.selectedExampleShader == 11){
+		    this.waterMap.bind(1);
+		}
+		else{
+			this.texture2.bind(1);
+		}
 
 		if (this.selectedObject==0) {
 			// teapot (scaled and rotated to conform to our axis)
