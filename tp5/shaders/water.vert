@@ -7,10 +7,15 @@ uniform mat4 uPMatrix;
 uniform mat4 uNMatrix;
 
 varying vec2 vTextureCoord;
+uniform sampler2D uSampler2;
+
+uniform float normScale;
+uniform float timeFactor;
 
 void main() {
+	vTextureCoord = aTextureCoord + timeFactor;
 
-	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+	vec3 offset = vec3(0.0,0.0,0.1) * texture2D(uSampler2, vTextureCoord).b * normScale*0.1;
 
-	vTextureCoord = aTextureCoord;
+	gl_Position = uPMatrix * uMVMatrix * vec4((aVertexPosition+offset), 1.0);
 }
