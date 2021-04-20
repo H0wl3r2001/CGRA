@@ -1,5 +1,6 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
 import { MySphere } from "./MySphere.js";
+import { MyMovingObject } from "./MyMovingObject.js";
 
 /**
 * MyScene
@@ -29,6 +30,7 @@ export class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
+        this.movingObject = new MyMovingObject(this,4,1);
 
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -46,6 +48,9 @@ export class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.displayAxis = true;
+        this.displayMovingObject = true;
+        this.displaySphere = false;
+        this.fric = 0.005;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -68,6 +73,11 @@ export class MyScene extends CGFscene {
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         //To be done...
+        this.checkKeys();
+        //---not in the specification:---
+        this.movingObject.friction();
+        //-------------------------------
+        this.movingObject.update();
     }
 
     display() {
@@ -90,9 +100,60 @@ export class MyScene extends CGFscene {
         this.sphereAppearance.apply();
         // ---- BEGIN Primitive drawing section
 
-        //This sphere does not have defined texture coordinates
-        this.incompleteSphere.display();
+        if(this.displaySphere){
+            //This sphere does not have defined texture coordinates
+            this.incompleteSphere.display();
+        }
+        
+
+        this.pushMatrix();
+        this.translate(this.movingObject.x, this.movingObject.y, this.movingObject.z);
+        this.rotate(this.movingObject.ang,0, 1, 0);
+        this.rotate(Math.PI/2,1,0,0);
+        if(this.displayMovingObject){
+            this.movingObject.display();
+        }
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
+
+     checkKeys(){
+         var text = "Keys pressed: ";
+         var keysPressed = false;
+
+        // Check for key codes e.g. in https://keycode.info/
+        if (this.gui.isKeyPressed("KeyW")){
+            text+=" W ";
+            this.movingObject.accelerate(0.01);
+            keysPressed = true;
+        }
+
+        if(this.gui.isKeyPressed("KeyS")){
+            text+= " S ";
+            this.movingObject.accelerate(-0.01);
+            keysPressed = true;
+        }
+
+        if(this.gui.isKeyPressed("KeyA")){
+            text+= " A ";
+            this.movingObject.turn(Math.PI/16);
+            keysPressed = true;
+        }
+
+        if(this.gui.isKeyPressed("KeyD")){
+            text+= " D ";
+            this.movingObject.turn(-Math.PI/16);
+            keysPressed = true;
+        }
+
+        if(this.gui.isKeyPressed("KeyR")){
+            text += " R ";
+            this.movingObject.reset();
+            keysPressed = true;
+        }
+
+        if(keysPressed)
+            console.log(text);
+     }
 }
