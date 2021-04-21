@@ -30,7 +30,15 @@ export class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        //this.map = new MyCubeMap(this, );
+        this.textures = [
+            'demo_cubemap/back.png',
+            "demo_cubemap/bottom.png",
+            "demo_cubemap/front.png",
+            "demo_cubemap/left.png",
+            "demo_cubemap/right.png",
+            "demo_cubemap/top.png"
+        ]
+        this.map = new MyCubeMap(this, this.textures);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.movingObject = new MyMovingObject(this,4,1);
 
@@ -52,6 +60,7 @@ export class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayMovingObject = true;
         this.displaySphere = false;
+        this.displayMap = true;
         this.fric = 0.005;
     }
     initLights() {
@@ -105,6 +114,14 @@ export class MyScene extends CGFscene {
         if(this.displaySphere){
             //This sphere does not have defined texture coordinates
             this.incompleteSphere.display();
+        }
+
+        if(this.displayMap)
+        {
+            this.pushMatrix();
+            this.scale(50,50,50);
+            this.map.display();
+            this.popMatrix();
         }
         
 
