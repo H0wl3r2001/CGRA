@@ -5,11 +5,14 @@ import {    MyQuad  } from './MyQuad.js';
  * @constructor
  * @param scene - Reference to MyScene object
  */
-export class MyUnitCubeQuad extends CGFobject{
-    constructor(scene, texSide, texBottom, texTop){
+export class MyCubeMap extends CGFobject{
+    constructor(scene, texRight, texLeft, texFront, texBack, texBottom, texTop){
 		    super(scene);
         this.square = new MyQuad(scene);
-        this.texSide = texSide;
+        this.texBack = texBack;
+        this.texFront = texFront;
+        this.texLeft = texLeft;
+        this.texRight = texRight;
         this.texBottom = texBottom;
         this.texTop = texTop;
         this.initMaterials();
@@ -17,12 +20,36 @@ export class MyUnitCubeQuad extends CGFobject{
 
     initMaterials()
     {
-        this.sideMat= new CGFappearance(this.scene);
-        this.sideMat.setAmbient(0.4, 0.4, 0.4, 1.0);
-        this.sideMat.setDiffuse(0.4, 0.4, 0.4, 1.0);
-        this.sideMat.setSpecular(0.4, 0.4, 0.4, 1.0);
-        this.sideMat.setShininess(1.0);
-        this.sideMat.setTexture(this.texSide);
+        this.frontMat= new CGFappearance(this.scene);
+        this.frontMat.setAmbient(0.4, 0.4, 0.4, 1.0);
+        this.frontMat.setDiffuse(0.4, 0.4, 0.4, 1.0);
+        this.frontMat.setSpecular(0.4, 0.4, 0.4, 1.0);
+        this.frontMat.setShininess(1.0);
+        this.frontMat.setTexture(this.texFront);
+        //this.sideMat.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.backMat= new CGFappearance(this.scene);
+        this.backMat.setAmbient(0.4, 0.4, 0.4, 1.0);
+        this.backMat.setDiffuse(0.4, 0.4, 0.4, 1.0);
+        this.backMat.setSpecular(0.4, 0.4, 0.4, 1.0);
+        this.backMat.setShininess(1.0);
+        this.backMat.setTexture(this.texBack);
+        //this.sideMat.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.rightMat= new CGFappearance(this.scene);
+        this.rightMat.setAmbient(0.4, 0.4, 0.4, 1.0);
+        this.rightMat.setDiffuse(0.4, 0.4, 0.4, 1.0);
+        this.rightMat.setSpecular(0.4, 0.4, 0.4, 1.0);
+        this.rightMat.setShininess(1.0);
+        this.rightMat.setTexture(this.texRight);
+        //this.sideMat.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.leftMat= new CGFappearance(this.scene);
+        this.leftMat.setAmbient(0.4, 0.4, 0.4, 1.0);
+        this.leftMat.setDiffuse(0.4, 0.4, 0.4, 1.0);
+        this.leftMat.setSpecular(0.4, 0.4, 0.4, 1.0);
+        this.leftMat.setShininess(1.0);
+        this.leftMat.setTexture(this.texLeft);
         //this.sideMat.setTextureWrap('REPEAT', 'REPEAT');
 
         this.topMat= new CGFappearance(this.scene);
@@ -45,16 +72,22 @@ export class MyUnitCubeQuad extends CGFobject{
     display()
     {
       this.scene.pushMatrix();
-      this.sideMat.apply();
+      this.scene.scale(50,50,50);
+      this.scene.popMatrix();
+
+      //front
+      this.scene.pushMatrix();
+      this.frontMat.apply();
       this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
       this.scene.translate(0, 0, 0.5);
       this.square.display();
       this.scene.popMatrix();
 
+      //back
       this.scene.pushMatrix();
       this.scene.translate(0, 0, -0.5);
       this.scene.rotate(Math.PI, 0, 1, 0);
-      this.sideMat.apply();
+      this.backMat.apply();
       this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
       this.square.display();
       this.scene.popMatrix();
@@ -76,20 +109,27 @@ export class MyUnitCubeQuad extends CGFobject{
       this.square.display();
       this.scene.popMatrix();
 
+      //right
       this.scene.pushMatrix();
       this.scene.translate(0.5, 0, 0);
       this.scene.rotate(Math.PI/2, 0, 1, 0);
-      this.sideMat.apply();
+      this.rightMat.apply();
       this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
       this.square.display();
       this.scene.popMatrix();
 
+      //left
       this.scene.pushMatrix();
       this.scene.translate(-0.5, 0, 0);
       this.scene.rotate(-Math.PI/2, 0, 1, 0);
-      this.sideMat.apply();
+      this.leftMat.apply();
       this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
       this.square.display();
+      this.scene.popMatrix();
+
+      //start drawing so as the center is the camera (HUGE DOUBTS)
+      this.scene.pushMatrix();
+      this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2]);
       this.scene.popMatrix();
     }
 
