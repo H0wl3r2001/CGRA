@@ -23,7 +23,7 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayMovingObject').name('Display Moving Object');
         this.gui.add(this.scene, 'displaySphere').name('Display Sphere');
         this.gui.add(this.scene, 'displayMap').name('Display Map');
-        //this.gui.add(this.scene, 'displayCylinder').name('Display Cylinder');
+        this.gui.add(this.scene, 'displayCylinder').name('Display Cylinder');
         this.gui.add(this.scene, 'fric', 0.0, 0.01).name('Friction Amount');
 
         //map texture updater

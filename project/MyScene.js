@@ -2,7 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
 import { MySphere } from "./MySphere.js";
 import { MyMovingObject } from "./MyMovingObject.js";
 import {MyCubeMap} from "./MyCubeMap.js";
-//import {MyCylinder} from "./MyCylinder.js";
+import {MyCylinder} from "./MyCylinder.js";
 
 /**
 * MyScene
@@ -58,7 +58,7 @@ export class MyScene extends CGFscene {
         //Scene objects
         this.axis = new CGFaxis(this);
         this.map = new MyCubeMap(this, this.texlists[this.selectedTexture]);
-        //this.cylinder = new MyCylinder(this, 6);
+        this.cylinder = new MyCylinder(this, 6);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.movingObject = new MyMovingObject(this,4,1);
 
@@ -81,7 +81,7 @@ export class MyScene extends CGFscene {
         this.displayMovingObject = true;
         this.displaySphere = false;
         this.displayMap = true;
-        //this.displayCylinder = false;
+        this.displayCylinder = false;
         this.fric = 0.005;
     }
     initLights() {
@@ -143,12 +143,12 @@ export class MyScene extends CGFscene {
             this.incompleteSphere.display();
         }
 
-        /*
+        
         if(this.displayCylinder)
         {
             this.cylinder.display();
         }
-        */
+        
 
         if(this.displayMap)
         {
