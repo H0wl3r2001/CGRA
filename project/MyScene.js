@@ -31,12 +31,12 @@ export class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.textures = [
-            'demo_cubemap/back.png',
-            "demo_cubemap/bottom.png",
-            "demo_cubemap/front.png",
-            "demo_cubemap/left.png",
-            "demo_cubemap/right.png",
-            "demo_cubemap/top.png"
+            'images/demo_cubemap/back.png',
+            "images/demo_cubemap/bottom.png",
+            "images/demo_cubemap/front.png",
+            "images/demo_cubemap/left.png",
+            "images/demo_cubemap/right.png",
+            "images/demo_cubemap/top.png"
         ]
         this.map = new MyCubeMap(this, this.textures);
         this.incompleteSphere = new MySphere(this, 16, 8);
