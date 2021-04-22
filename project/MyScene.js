@@ -75,6 +75,14 @@ export class MyScene extends CGFscene {
 		this.sphereAppearance.setSpecular(0.0, 0.0, 0.0, 1);
 		this.sphereAppearance.setShininess(120);
 
+        this.sphereEarth = new CGFappearance(this);
+        this.sphereEarth.setAmbient(0.3, 0.3, 0.3, 1);
+        this.sphereEarth.setDiffuse(0.7, 0.7, 0.7, 1);
+        this.sphereEarth.setSpecular(0.0, 0.0, 0.0, 1);
+        this.sphereEarth.setShininess(120);
+        this.sphereEarth.loadTexture("images/earth.jpg");
+        this.sphereEarth.setTextureWrap('REPEAT', 'REPEAT');
+
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -135,7 +143,7 @@ export class MyScene extends CGFscene {
         if (this.displayAxis)
             this.axis.display();
 
-        this.sphereAppearance.apply();
+        this.sphereEarth.apply();
         // ---- BEGIN Primitive drawing section
 
         if(this.displaySphere){
@@ -143,6 +151,7 @@ export class MyScene extends CGFscene {
             this.incompleteSphere.display();
         }
 
+        this.defaultAppearance.apply();
         
         if(this.displayCylinder)
         {
