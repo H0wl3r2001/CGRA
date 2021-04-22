@@ -137,6 +137,16 @@ export class MyCubeMap extends CGFobject{
 
     }
 
+    updateTex(lista)
+    {
+      this.backMat.loadTexture(lista[0]);
+      this.bottomMat.loadTexture(lista[1]);
+      this.frontMat.loadTexture(lista[2]);
+      this.leftMat.loadTexture(lista[3]);
+      this.rightMat.loadTexture(lista[4]);
+      this.topMat.loadTexture(lista[5]);
+    }
+
     updateTexCoords(coords) {
       this.square.updateTexCoords(coords);
     }

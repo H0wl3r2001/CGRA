@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
 import { MySphere } from "./MySphere.js";
 import { MyMovingObject } from "./MyMovingObject.js";
 import {MyCubeMap} from "./MyCubeMap.js";
+//import {MyCylinder} from "./MyCylinder.js";
 
 /**
 * MyScene
@@ -28,9 +29,7 @@ export class MyScene extends CGFscene {
         
         this.enableTextures(true);
 
-        //Initialize scene objects
-        this.axis = new CGFaxis(this);
-        this.textures = [
+        this.texture_test = [
             'images/demo_cubemap/back.png',
             "images/demo_cubemap/bottom.png",
             "images/demo_cubemap/front.png",
@@ -38,7 +37,28 @@ export class MyScene extends CGFscene {
             "images/demo_cubemap/right.png",
             "images/demo_cubemap/top.png"
         ]
-        this.map = new MyCubeMap(this, this.textures);
+        
+        this.texture_desert = //aka a pior textura que já fiz à face da Terra, but hey, it works.
+        [
+            "images/desert_prison/desert_front.jpg",
+            "images/desert_prison/desert_bottom.jpg",
+            "images/desert_prison/desert_front.jpg",
+            "images/desert_prison/desert_front.jpg",
+            "images/desert_prison/desert_front.jpg",
+            "images/desert_prison/sky_top.jpg",
+        ]
+
+        
+        //map-texture changeable features
+        this.textureMapID ={'test': 0, 'desert': 1};
+
+        this.texlists = [this.texture_test, this.texture_desert]
+        this.selectedTexture = 1;
+
+        //Scene objects
+        this.axis = new CGFaxis(this);
+        this.map = new MyCubeMap(this, this.texlists[this.selectedTexture]);
+        //this.cylinder = new MyCylinder(this, 6);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.movingObject = new MyMovingObject(this,4,1);
 
@@ -61,6 +81,7 @@ export class MyScene extends CGFscene {
         this.displayMovingObject = true;
         this.displaySphere = false;
         this.displayMap = true;
+        //this.displayCylinder = false;
         this.fric = 0.005;
     }
     initLights() {
@@ -91,6 +112,12 @@ export class MyScene extends CGFscene {
         this.movingObject.update();
     }
 
+    changeText()
+    {
+        this.texlists[this.selectedTexture];
+        this.map.updateTex(this.texlists[this.selectedTexture]);
+    }
+
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
@@ -115,6 +142,13 @@ export class MyScene extends CGFscene {
             //This sphere does not have defined texture coordinates
             this.incompleteSphere.display();
         }
+
+        /*
+        if(this.displayCylinder)
+        {
+            this.cylinder.display();
+        }
+        */
 
         if(this.displayMap)
         {
