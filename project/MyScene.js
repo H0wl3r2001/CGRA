@@ -209,6 +209,19 @@ export class MyScene extends CGFscene {
             keysPressed = true;
         }
 
+        if(this.gui.isKeyPressed("KeyP")){
+            text += " P ";
+            this.movingObject.setY(3);
+            keysPressed = true;
+        }
+
+        if(this.gui.isKeyPressed("KeyL")){
+            text += " L ";
+            this.movingObject.setY(-3);
+            keysPressed = true;
+        }
+
+
         if(this.gui.isKeyPressed("KeyR")){
             text += " R ";
             this.movingObject.reset();

@@ -102,6 +102,10 @@ export class MyMovingObject extends CGFobject {
         this.v = 0;
         this.ang = 0;
     }
+
+    setY(val){
+        this.y = val;
+    }
     
     //---not in the specification:---
     friction(){
