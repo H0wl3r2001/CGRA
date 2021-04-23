@@ -77,11 +77,9 @@ export class MyCubeMap extends CGFobject{
     
     display()
     {
-
       //front
       this.scene.pushMatrix();
       this.frontMat.apply();
-      this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
       this.scene.translate(0, 0, 0.5);
       this.square.display();
       this.scene.popMatrix();
@@ -91,10 +89,9 @@ export class MyCubeMap extends CGFobject{
       this.scene.translate(0, 0, -0.5);
       this.scene.rotate(Math.PI, 0, 1, 0);
       this.backMat.apply();
-      this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
       this.square.display();
       this.scene.popMatrix();
-      
+
       //top
       this.scene.pushMatrix();
       this.scene.translate(0, 0.5, 0);
@@ -102,13 +99,12 @@ export class MyCubeMap extends CGFobject{
       this.topMat.apply();
       this.square.display();
       this.scene.popMatrix();
-      
+
       //bottom
       this.scene.pushMatrix();
       this.scene.translate(0, -0.5, 0);
       this.scene.rotate(Math.PI/2, 1, 0, 0);
       this.bottomMat.apply();
-      this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
       this.square.display();
       this.scene.popMatrix();
 
@@ -117,7 +113,6 @@ export class MyCubeMap extends CGFobject{
       this.scene.translate(0.5, 0, 0);
       this.scene.rotate(Math.PI/2, 0, 1, 0);
       this.rightMat.apply();
-      this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
       this.square.display();
       this.scene.popMatrix();
 
@@ -126,7 +121,6 @@ export class MyCubeMap extends CGFobject{
       this.scene.translate(-0.5, 0, 0);
       this.scene.rotate(-Math.PI/2, 0, 1, 0);
       this.leftMat.apply();
-      this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
       this.square.display();
       this.scene.popMatrix();
 
