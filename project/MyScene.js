@@ -3,6 +3,8 @@ import { MySphere } from "./MySphere.js";
 import { MyMovingObject } from "./MyMovingObject.js";
 import {MyCubeMap} from "./MyCubeMap.js";
 import {MyCylinder} from "./MyCylinder.js";
+import { MyFish } from "./MyFish.js";
+import { MyTriangleSmall } from "./MyTriangleSmall.js";
 
 /**
 * MyScene
@@ -61,6 +63,8 @@ export class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this, 6);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.movingObject = new MyMovingObject(this,4,1);
+        this.fish = new MyFish(this, 16, 8);
+        this.test = new MyTriangleSmall(this);
 
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -90,6 +94,8 @@ export class MyScene extends CGFscene {
         this.displaySphere = false;
         this.displayMap = true;
         this.displayCylinder = false;
+        this.displayFish = true;
+        this.displayTest = true;
         this.fric = 0.005;
     }
     initLights() {
@@ -166,7 +172,21 @@ export class MyScene extends CGFscene {
             this.map.display();
             this.popMatrix();
         }
+
+        if(this.displayFish)
+        {
+            this.fish.display();
+        }
         
+        /**  
+        if(this.displayTest)
+        {
+            this.pushMatrix();
+            this.translate(0,1.5,0);
+            this.test.display();
+            this.popMatrix();
+        }
+        */
 
         this.pushMatrix();
         this.translate(this.movingObject.x, this.movingObject.y, this.movingObject.z);
