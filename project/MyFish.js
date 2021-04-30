@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import {CGFappearance, CGFobject, CGFshader} from '../lib/CGF.js';
 import {MySphere} from './MySphere.js';
 import {MyTriangleSmall} from './MyTriangleSmall.js';
 
@@ -15,19 +15,28 @@ export class MyFish extends CGFobject
         this.topFin = new MyTriangleSmall(scene);
         this.swimmerFin = new MyTriangleSmall(scene);
         this.initMaterials();
+        this.bodyShader = new CGFshader(this.scene.gl, "shader/fishBody.vert", "shader/fishBody.frag");
     }
-
+    
     initMaterials()
     {
-
-    }
-
+        this.scaleBody = new CGFappearance(this.scene);
+        this.scaleBody.setAmbient(0.3, 0.3, 0.3, 1);
+        this.scaleBody.setDiffuse(0.7, 0.7, 0.7, 1);
+        this.scaleBody.setSpecular(0.0, 0.0, 0.0, 1);
+        this.scaleBody.setShininess(120);
+        this.scaleBody.loadTexture("images/scales.jpg");
+        this.scaleBody.setTextureWrap('REPEAT', 'REPEAT');
+    };
+    
     display()
     {
         //body (how to force required dimensions?)
         this.scene.pushMatrix();
         this.scene.scale(1.5,1,1);
         this.scene.translate(0,3,0);
+        this.scaleBody.apply();
+        this.scene.setActiveShader(this.bodyShader);
         this.body.display();
         this.scene.popMatrix();
 
@@ -62,18 +71,18 @@ export class MyFish extends CGFobject
 
         //left fin
         this.scene.pushMatrix();
-        this.scene.translate(0, 2.5, 1.01);
+        this.scene.translate(0, 2.5, 1.02);
         this.scene.rotate(3*Math.PI/4, 0,0,1);
-        this.scene.rotate(Math.PI/6,1,0,0);
+        this.scene.rotate(Math.PI/6,1,1,0);
         this.scene.scale(0.5,0.5,0.5);
         this.leftFin.display();
         this.scene.popMatrix();
 
         //right fin
         this.scene.pushMatrix();
-        this.scene.translate(0, 2.5, -1.01);
+        this.scene.translate(0, 2.5, -1.02);
         this.scene.rotate(3*Math.PI/4, 0,0,1);
-        this.scene.rotate(-Math.PI/6,1,0,0);
+        this.scene.rotate(-Math.PI/6,1,1,0);
         this.scene.scale(0.5,0.5,0.5);
         this.rightFin.display();
         this.scene.popMatrix();
