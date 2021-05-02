@@ -145,6 +145,7 @@ export class MyScene extends CGFscene {
         
         
         this.defaultAppearance.apply();
+
         // Draw axis
         if (this.displayAxis)
             this.axis.display();

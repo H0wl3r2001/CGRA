@@ -16,6 +16,8 @@ export class MyFish extends CGFobject
         this.swimmerFin = new MyTriangleSmall(scene);
         this.initMaterials();
         this.bodyShader = new CGFshader(this.scene.gl, "shader/fishBody.vert", "shader/fishBody.frag");
+        this.eyeShader = new CGFshader(this.scene.gl, "shader/fishEye.vert", "shader/fishEye.frag")
+        this.finShader = new CGFshader(this.scene.gl, "shader/fishFin.vert", "shader/fishFin.frag")
     }
     
     initMaterials()
@@ -31,19 +33,25 @@ export class MyFish extends CGFobject
     
     display()
     {
+        this.scene.setActiveShader(this.bodyShader);
+
         //body (how to force required dimensions?)
+        this.scaleBody.apply();
         this.scene.pushMatrix();
         this.scene.scale(1.5,1,1);
         this.scene.translate(0,3,0);
-        this.scaleBody.apply();
-        this.scene.setActiveShader(this.bodyShader);
+        this.scene.rotate(Math.PI/2, 0, 0, 1);
         this.body.display();
         this.scene.popMatrix();
+
+        this.scene.setActiveShader(this.eyeShader);
 
         //left eye
         this.scene.pushMatrix();
         this.scene.translate(-1, 3, 0.7);
         this.scene.scale(0.2, 0.2, 0.2);
+        this.scene.rotate(2*Math.PI/3, 1, 0, 0);
+        this.scene.rotate(Math.PI/3, 0, 1, 0);
         this.eye1.display();
         this.scene.popMatrix();
 
@@ -51,8 +59,12 @@ export class MyFish extends CGFobject
         this.scene.pushMatrix();
         this.scene.translate(-1, 3, -0.7);
         this.scene.scale(0.2, 0.2, 0.2);
+        this.scene.rotate(-Math.PI/3, 1, 0, 0);
+        this.scene.rotate(Math.PI/3, 0, 1, 0);
         this.eye2.display();
         this.scene.popMatrix();
+
+        this.scene.setActiveShader(this.finShader);
 
         //top fin
         this.scene.pushMatrix();
@@ -86,5 +98,7 @@ export class MyFish extends CGFobject
         this.scene.scale(0.5,0.5,0.5);
         this.rightFin.display();
         this.scene.popMatrix();
+
+        this.scene.setActiveShader(this.scene.defaultShader);
     }
 }
