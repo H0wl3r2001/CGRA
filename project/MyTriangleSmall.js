@@ -17,9 +17,9 @@ export class MyTriangleSmall extends CGFobject
 		//Counter-clockwise reference of vertices
         this.vertices = 
         [
-            -1, 0, 0,   //0
-            1, 0, 0,    //1
-            0, 1, 0     //2
+            -2, 0, 0,   //0
+            0, 0, 0,    //1
+            -1, 1, 0     //2
         ];
 
         this.indices = 

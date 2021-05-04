@@ -20,7 +20,7 @@ export class MyFish extends CGFobject
         this.eyeShader = new CGFshader(this.scene.gl, "shader/fishEye.vert", "shader/fishEye.frag");
         this.finShader = new CGFshader(this.scene.gl, "shader/fishFin.vert", "shader/fishFin.frag");
         this.anglBack = 0;
-        this.aglSideR = 0;
+        this.anglSideR = 0;
         this.anglSideL = 0;
         this.directionBack = 1;
         this.directionSideR = 1;
@@ -75,7 +75,7 @@ export class MyFish extends CGFobject
 
         //top fin
         this.scene.pushMatrix();
-        this.scene.translate(0,4.35,0);
+        this.scene.translate(-0.35,4,0);
         this.scene.rotate(5*Math.PI/4, 0,0,1);
         this.scene.scale(0.5,0.5,0.5);
         this.topFin.display();
@@ -92,8 +92,8 @@ export class MyFish extends CGFobject
 
         //left fin
         this.scene.pushMatrix();
-        this.scene.translate(0, 2.5, 1.02);
-        //this.scene.rotate(this.anglSideL, 1,0,0);
+        this.scene.translate(0, 3, 1);
+        this.scene.rotate(this.anglSideL, 1,0,0);
         this.scene.rotate(3*Math.PI/4, 0,0,1);
         this.scene.rotate(Math.PI/6,1,1,0);
         this.scene.scale(0.5,0.5,0.5);
@@ -102,8 +102,8 @@ export class MyFish extends CGFobject
 
         //right fin
         this.scene.pushMatrix();
-        this.scene.translate(0, 2.5, -1.02);
-        //this.scene.rotate(this.anglSideR, 1,0,0);
+        this.scene.translate(0, 3, -1);
+        this.scene.rotate(this.anglSideR, 1,0,0);
         this.scene.rotate(3*Math.PI/4, 0,0,1);
         this.scene.rotate(-Math.PI/6,1,1,0);
         this.scene.scale(0.5,0.5,0.5);
@@ -121,20 +121,20 @@ export class MyFish extends CGFobject
         if(this.anglBack <= -Math.PI/9)
             this.directionBack = 1;
 
-        if(this.anglSideR >= Math.PI/12) //15 degrees
+        if(this.anglSideR > Math.PI/12) //15 degrees
             this.directionSideR = (-1);
         
-        if(this.anglSideR <= -Math.PI/12)
+        else if(this.anglSideR <= -Math.PI/12)
             this.directionSideR = 1;
         
-        if(this.anglSideL >= Math.PI/12) //15 degrees
-            this.directionSideR = (1);
+        if(this.anglSideL > Math.PI/12) //15 degrees
+            this.directionSideL = -1;
         
-        if(this.anglSideL <= -Math.PI/12)
-            this.directionSideR = -1;
+        else if(this.anglSideL <= -Math.PI/12)
+            this.directionSideL = 1;
 
         this.anglBack += this.directionBack*3*(Math.PI/180);
-        this.anglSideR += this.directionSide*2*(Math.PI/180);
-        this.anglSideL += this.directionSide*(-2)*(Math.PI/180); //one side does the opposite of the other
+        this.anglSideR += this.directionSideR*2*(Math.PI/180);
+        this.anglSideL += this.directionSideL*2*(Math.PI/180); //one side does the opposite of the other
     }
 }
