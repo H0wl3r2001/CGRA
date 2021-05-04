@@ -23,7 +23,8 @@ export class MyFish extends CGFobject
         this.aglSideR = 0;
         this.anglSideL = 0;
         this.directionBack = 1;
-        this.directionSide = 1;
+        this.directionSideR = 1;
+        this.directionSideL = -1;
     }
     
     initMaterials()
@@ -121,10 +122,16 @@ export class MyFish extends CGFobject
             this.directionBack = 1;
 
         if(this.anglSideR >= Math.PI/12) //15 degrees
-            this.directionSide = (-1);
+            this.directionSideR = (-1);
         
         if(this.anglSideR <= -Math.PI/12)
-            this.directionSide = 1;
+            this.directionSideR = 1;
+        
+        if(this.anglSideL >= Math.PI/12) //15 degrees
+            this.directionSideR = (1);
+        
+        if(this.anglSideL <= -Math.PI/12)
+            this.directionSideR = -1;
 
         this.anglBack += this.directionBack*3*(Math.PI/180);
         this.anglSideR += this.directionSide*2*(Math.PI/180);
