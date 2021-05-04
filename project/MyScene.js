@@ -124,6 +124,8 @@ export class MyScene extends CGFscene {
         this.movingObject.friction();
         //-------------------------------
         this.movingObject.update();
+
+        this.fish.animation();
     }
 
     changeText()
