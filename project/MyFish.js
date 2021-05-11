@@ -1,4 +1,4 @@
-import {CGFappearance, CGFobject, CGFshader} from '../lib/CGF.js';
+import {CGFappearance, CGFobject, CGFshader, CGFtexture} from '../lib/CGF.js';
 import {MySphere} from './MySphere.js';
 import {MyTriangleSmall} from './MyTriangleSmall.js';
 import {MyTriangleBig} from './MyTriangleBig.js';
@@ -17,8 +17,6 @@ export class MyFish extends CGFobject
         this.swimmerFin = new MyTriangleBig(scene);
         this.initMaterials();
         this.bodyShader = new CGFshader(this.scene.gl, "shader/fishBody.vert", "shader/fishBody.frag");
-        this.eyeShader = new CGFshader(this.scene.gl, "shader/fishEye.vert", "shader/fishEye.frag");
-        this.finShader = new CGFshader(this.scene.gl, "shader/fishFin.vert", "shader/fishFin.frag");
         this.anglBack = 0;
         this.anglSideR = 0;
         this.anglSideL = 0;
@@ -29,36 +27,54 @@ export class MyFish extends CGFobject
     
     initMaterials()
     {
-        this.scaleBody = new CGFappearance(this.scene);
-        this.scaleBody.setAmbient(0.3, 0.3, 0.3, 1);
-        this.scaleBody.setDiffuse(0.7, 0.7, 0.7, 1);
-        this.scaleBody.setSpecular(0.0, 0.0, 0.0, 1);
-        this.scaleBody.setShininess(120);
-        this.scaleBody.loadTexture("images/scales.jpg");
-        this.scaleBody.setTextureWrap('REPEAT', 'REPEAT');
+        this.fishBody = new CGFappearance(this.scene);
+        this.fishBody.setAmbient(1, 0, 0, 1);
+        this.fishBody.setDiffuse(1, 0, 0, 1);
+        this.fishBody.setSpecular(1, 0, 0, 1);
+        this.fishBody.setShininess(120);
+        this.fishBody.loadTexture("images/scales.jpg");
+        this.fishBody.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.fishEye = new CGFappearance(this.scene);
+        this.fishEye.setAmbient(1, 1, 1, 1);
+        this.fishEye.setDiffuse(1, 1, 1, 1);
+        this.fishEye.setSpecular(1, 1, 1, 1);
+        this.fishEye.setShininess(120);
+        this.fishEye.loadTexture("images/fishEye.png");
+        this.fishEye.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.fishFin = new CGFappearance(this.scene);
+        this.fishFin.setAmbient(1, 0, 0, 1);
+        this.fishFin.setDiffuse(1, 0, 0, 1);
+        this.fishFin.setSpecular(1, 0, 0, 1);
+        this.fishFin.setShininess(120);
+        this.fishFin.setTextureWrap('REPEAT', 'REPEAT');
     };
     
     display()
     {
         this.scene.setActiveShader(this.bodyShader);
+        this.fishBody.apply();
 
-        //body (how to force required dimensions?)
-        this.scaleBody.apply();
+        //-------------body-------------
         this.scene.pushMatrix();
         this.scene.scale(1.5,1,1);
         this.scene.translate(0,3,0);
         this.scene.rotate(Math.PI/2, 0, 0, 1);
         this.body.display();
         this.scene.popMatrix();
+        //------------------------------
 
-        this.scene.setActiveShader(this.eyeShader);
+        this.scene.setActiveShader(this.scene.defaultShader);
+        this.fishEye.apply();
 
+        //-------------eyes-------------
         //left eye
         this.scene.pushMatrix();
         this.scene.translate(-1, 3, 0.7);
         this.scene.scale(0.2, 0.2, 0.2);
-        this.scene.rotate(2*Math.PI/3, 1, 0, 0);
-        this.scene.rotate(Math.PI/3, 0, 1, 0);
+        this.scene.rotate(-Math.PI/2, 1, 0, 0);
+        this.scene.rotate(-Math.PI/6, 0, 0, 1);
         this.eye1.display();
         this.scene.popMatrix();
 
@@ -66,13 +82,15 @@ export class MyFish extends CGFobject
         this.scene.pushMatrix();
         this.scene.translate(-1, 3, -0.7);
         this.scene.scale(0.2, 0.2, 0.2);
-        this.scene.rotate(-Math.PI/3, 1, 0, 0);
-        this.scene.rotate(Math.PI/3, 0, 1, 0);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(-Math.PI/6, 0, 0, 1);
         this.eye2.display();
         this.scene.popMatrix();
+        //------------------------------
 
-        this.scene.setActiveShader(this.finShader);
-
+        this.fishFin.apply();
+        
+        //-------------fins-------------
         //top fin
         this.scene.pushMatrix();
         this.scene.translate(-0.35,4,0);
@@ -109,8 +127,9 @@ export class MyFish extends CGFobject
         this.scene.scale(0.5,0.5,0.5);
         this.rightFin.display();
         this.scene.popMatrix();
+        //------------------------------
 
-        this.scene.setActiveShader(this.scene.defaultShader);
+        this.scene.defaultAppearance.apply();
     }
 
     animation()
