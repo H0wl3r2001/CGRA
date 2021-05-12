@@ -9,9 +9,6 @@ export class MyCubeMap extends CGFobject{
     constructor(scene, textures){
 		    super(scene);
         this.square = new MyQuad(scene);
-        this.cameraPosX = this.scene.camera.position[0];
-        this.cameraPosY = this.scene.camera.position[1];
-        this.cameraPosZ = this.scene.camera.position[2];
         this.texBack = textures[0];
         this.texFront = textures[2];
         this.texLeft = textures[3];
@@ -82,8 +79,8 @@ export class MyCubeMap extends CGFobject{
     {
       this.scene.pushMatrix();
 
-      // this.scene.position = this.scene.camera.position;
-      this.scene.scale(50,50,50);   // 1 unit effectively becomes 50 units
+      this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2]);
+      this.scene.scale(500,500,500);
 
       //front
       this.frontMat.apply();
@@ -131,13 +128,6 @@ export class MyCubeMap extends CGFobject{
       this.scene.rotate(-Math.PI/2, 0, 1, 0);
       this.square.display();
       this.scene.popMatrix();
-
-      //start drawing so as the center is the camera
-      // this.scene.pushMatrix();
-      // this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2]);
-      // this.scene.popMatrix();
-
-      // this.position = this.scene.camera.position;
 
       this.scene.popMatrix();
     }

@@ -15,8 +15,8 @@ export class MyFish extends CGFobject
         this.leftFin = new MyTriangleSmall(scene);
         this.topFin = new MyTriangleSmall(scene);
         this.swimmerFin = new MyTriangleBig(scene);
-        this.initMaterials();
         this.bodyShader = new CGFshader(this.scene.gl, "shader/fishBody.vert", "shader/fishBody.frag");
+        this.initMaterials();
         this.anglBack = 0;
         this.anglSideR = 0;
         this.anglSideL = 0;
@@ -53,6 +53,8 @@ export class MyFish extends CGFobject
     
     display()
     {
+        this.scene.pushMatrix();
+        this.scene.scale(0.5, 0.5, 0.5);
         this.scene.setActiveShader(this.bodyShader);
         this.fishBody.apply();
 
@@ -128,6 +130,8 @@ export class MyFish extends CGFobject
         this.rightFin.display();
         this.scene.popMatrix();
         //------------------------------
+
+        this.scene.popMatrix();
 
         this.scene.defaultAppearance.apply();
     }

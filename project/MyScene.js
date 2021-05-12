@@ -4,7 +4,8 @@ import { MyMovingObject } from "./MyMovingObject.js";
 import {MyCubeMap} from "./MyCubeMap.js";
 import {MyCylinder} from "./MyCylinder.js";
 import { MyFish } from "./MyFish.js";
-import { MyTriangleSmall } from "./MyTriangleSmall.js";
+import { MySeaFloor } from "./MySeaFloor.js";
+import { MyNest } from "./MyNest.js";
 
 /**
 * MyScene
@@ -40,22 +41,31 @@ export class MyScene extends CGFscene {
             "images/demo_cubemap/top.png"
         ]
         
-        this.texture_desert = //aka a pior textura que já fiz à face da Terra, but hey, it works.
+        this.texture_desert =
         [
             "images/desert_prison/desert_front.jpg",
             "images/desert_prison/desert_bottom.jpg",
             "images/desert_prison/desert_front.jpg",
             "images/desert_prison/desert_front.jpg",
             "images/desert_prison/desert_front.jpg",
-            "images/desert_prison/sky_top.jpg",
+            "images/desert_prison/sky_top.jpg"
+        ]
+
+        this.texture_ocean = [
+            "images/underwater_cubemap/back.jpg",
+            "images/underwater_cubemap/bottom.jpg",
+            "images/underwater_cubemap/front.jpg",
+            "images/underwater_cubemap/left.jpg",
+            "images/underwater_cubemap/right.jpg",
+            "images/underwater_cubemap/top.jpg"
         ]
 
         
         //map-texture changeable features
-        this.textureMapID ={'test': 0, 'desert': 1};
+        this.textureMapID ={'test': 0, 'desert': 1, 'ocean': 2};
 
-        this.texlists = [this.texture_test, this.texture_desert]
-        this.selectedTexture = 1;
+        this.texlists = [this.texture_test, this.texture_desert, this.texture_ocean];
+        this.selectedTexture = 2;
 
         //Scene objects
         this.axis = new CGFaxis(this);
@@ -64,7 +74,8 @@ export class MyScene extends CGFscene {
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.movingObject = new MyMovingObject(this,4,1);
         this.fish = new MyFish(this, 16, 8);
-        this.test = new MyTriangleSmall(this);
+        this.seaFloor = new MySeaFloor(this);
+        this.nest = new MyNest(this);
 
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -90,12 +101,9 @@ export class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayMovingObject = true;
+        this.displayMovingObject = false;
         this.displaySphere = false;
-        this.displayMap = true;
         this.displayCylinder = false;
-        this.displayFish = true;
-        this.displayTest = true;
         this.fric = 0.005;
     }
     initLights() {
@@ -168,17 +176,19 @@ export class MyScene extends CGFscene {
             this.cylinder.display();
         }
         
+        //display project objects
+        //map
+        this.map.display();
 
-        if(this.displayMap)
-        {
-            this.map.display();
-        }
+        //floor
+        this.seaFloor.display();
+        this.nest.display();
 
-        if(this.displayFish)
-        {
-            this.fish.display();
-        }
+        //fish
+        this.fish.display();
 
+
+        //display moving object
         this.pushMatrix();
         this.translate(this.movingObject.x, this.movingObject.y, this.movingObject.z);
         this.rotate(this.movingObject.ang,0, 1, 0);
