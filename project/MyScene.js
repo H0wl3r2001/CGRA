@@ -105,8 +105,8 @@ export class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(12, 12, 12), vec3.fromValues(0, 0, 0));
-        // this.camera = new CGFcamera(1.5, 0.1, 500, vec3.fromValues(2, 2, 2), vec3.fromValues(0, 0, 0));       //CGFcamera(fov,near,far,position,target)
+        // this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(12, 12, 12), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(1.5, 0.1, 500, vec3.fromValues(2, 2, 2), vec3.fromValues(0, 0, 0));       //CGFcamera(fov,near,far,position,target)
     }
 
     setDefaultAppearance() {
@@ -171,26 +171,13 @@ export class MyScene extends CGFscene {
 
         if(this.displayMap)
         {
-            this.pushMatrix();
-            this.scale(50,50,50);
             this.map.display();
-            this.popMatrix();
         }
 
         if(this.displayFish)
         {
             this.fish.display();
         }
-        
-        /**  
-        if(this.displayTest)
-        {
-            this.pushMatrix();
-            this.translate(0,1.5,0);
-            this.test.display();
-            this.popMatrix();
-        }
-        */
 
         this.pushMatrix();
         this.translate(this.movingObject.x, this.movingObject.y, this.movingObject.z);
