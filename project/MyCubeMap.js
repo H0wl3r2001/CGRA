@@ -130,6 +130,9 @@ export class MyCubeMap extends CGFobject{
       this.scene.popMatrix();
 
       this.scene.popMatrix();
+      
+      //TODO:moving this outside would be better, after we clean the rest of the code up a bit
+      this.scene.defaultAppearance.apply();
     }
 
     updateTex(lista)

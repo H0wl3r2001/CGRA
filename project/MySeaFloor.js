@@ -27,6 +27,7 @@ export class MySeaFloor extends CGFobject{
     display()
     {
         this.scene.setActiveShader(this.sandShader);
+
         this.sandTex.bind(0);
         this.sandMap.bind(1);
 
@@ -38,8 +39,6 @@ export class MySeaFloor extends CGFobject{
         this.sandFloor.display();
         this.scene.popMatrix()
         this.scene.popMatrix();
-
-        this.scene.setActiveShader(this.scene.defaultShader);
     }
 
     updateTexCoords(coords) {

@@ -36,8 +36,6 @@ export class MySky extends CGFobject{
         this.scene.rotate(-Math.PI/2, 1, 0, 0);
         this.sky.display();
         this.scene.popMatrix();
-
-        this.scene.setActiveShader(this.scene.defaultShader);
     }
 
     updateTexCoords(coords) {

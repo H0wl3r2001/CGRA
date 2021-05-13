@@ -7,6 +7,7 @@ import { MyFish } from "./MyFish.js";
 import { MySeaFloor } from "./MySeaFloor.js";
 import { MyNest } from "./MyNest.js";
 import { MySky } from "./MySky.js";
+import { MyRockSet } from "./MyRockSet.js";
 
 /**
 * MyScene
@@ -70,7 +71,7 @@ export class MyScene extends CGFscene {
 
         //Scene objects
         this.axis = new CGFaxis(this);
-        this.map = new MyCubeMap(this, this.texlists[this.selectedTexture]);
+        this.skyBox = new MyCubeMap(this, this.texlists[this.selectedTexture]);
         this.cylinder = new MyCylinder(this, 6);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.movingObject = new MyMovingObject(this,4,1);
@@ -78,6 +79,7 @@ export class MyScene extends CGFscene {
         this.seaFloor = new MySeaFloor(this);
         this.nest = new MyNest(this);
         this.sky = new MySky(this);
+        this.rockSet = new MyRockSet(this);
 
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -115,8 +117,8 @@ export class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        // this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(12, 12, 12), vec3.fromValues(0, 0, 0));
-        this.camera = new CGFcamera(1.5, 0.1, 500, vec3.fromValues(2, 2, 2), vec3.fromValues(0, 0, 0));       //CGFcamera(fov,near,far,position,target)
+        // this.camera = new CGFcamera(1.5, 0.1, 500, vec3.fromValues(2, 2, 2), vec3.fromValues(0, 0, 0));       //CGFcamera(fov,near,far,position,target)
+        this.camera = new CGFcamera(1.5, 0.1, 500, vec3.fromValues(3, 6, 3), vec3.fromValues(0, 1, 0));       //CGFcamera(fov,near,far,position,target)
     }
 
     setDefaultAppearance() {
@@ -144,7 +146,7 @@ export class MyScene extends CGFscene {
     changeText()
     {
         this.texlists[this.selectedTexture];
-        this.map.updateTex(this.texlists[this.selectedTexture]);
+        this.skyBox.updateTex(this.texlists[this.selectedTexture]);
     }
 
     display() {
@@ -158,16 +160,43 @@ export class MyScene extends CGFscene {
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
         
-        
-        this.defaultAppearance.apply();
+        // ---- BEGIN Primitive drawing section
 
         // Draw axis
         if (this.displayAxis)
             this.axis.display();
+        
+        //display project objects
+        //we display objects which use shaders
+        //sequentially, because the
+        //setActiveShader function is very slow
+        //and may cause performance issues
 
+        //---OBJECTS NOT USING SHADERS---
+        this.skyBox.display();
+        this.rockSet.display();
+
+        //---OBJECTS USING SHADERS-------
+        //ambient
+        this.seaFloor.display();
+        this.sky.display();
+        this.nest.display();
+
+        //fish
+        //we draw it last because it resets the
+        //shader to the default scene one, in order
+        //to draw an element of its body
+        this.pushMatrix();
+        this.translate(0, 2, 0);
+        this.fish.display();
+        this.popMatrix();
+
+        //reset scene appearance
+        this.defaultAppearance.apply();
+
+
+        //Mario: do we really need to keep these objects (globe, cylinder and movingObject)?
         this.sphereEarth.apply();
-        // ---- BEGIN Primitive drawing section
-
         if(this.displaySphere){
             //This sphere does not have defined texture coordinates
             this.incompleteSphere.display();
@@ -179,21 +208,7 @@ export class MyScene extends CGFscene {
         {
             this.cylinder.display();
         }
-        
-        //display project objects
-        //map
-        this.map.display();
 
-        //floor
-        this.seaFloor.display();
-        this.nest.display();
-
-        //fish
-        this.fish.display();
-        this.sky.display();
-
-
-        //display moving object
         this.pushMatrix();
         this.translate(this.movingObject.x, this.movingObject.y, this.movingObject.z);
         this.rotate(this.movingObject.ang,0, 1, 0);

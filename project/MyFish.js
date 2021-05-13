@@ -31,13 +31,7 @@ export class MyFish extends CGFobject
     
     initMaterials()
     {
-        this.fishBody = new CGFappearance(this.scene);
-        this.fishBody.setAmbient(1, 0, 0, 1);
-        this.fishBody.setDiffuse(1, 0, 0, 1);
-        this.fishBody.setSpecular(1, 0, 0, 1);
-        this.fishBody.setShininess(120);
-        this.fishBody.loadTexture("images/scales.jpg");
-        this.fishBody.setTextureWrap('REPEAT', 'REPEAT');
+        this.fishBodyTex = new CGFtexture(this.scene, "images/scales.jpg");
 
         this.fishEye = new CGFappearance(this.scene);
         this.fishEye.setAmbient(1, 1, 1, 1);
@@ -57,10 +51,11 @@ export class MyFish extends CGFobject
     
     display()
     {
+        this.scene.setActiveShader(this.bodyShader);
+        this.fishBodyTex.bind(0);
+        
         this.scene.pushMatrix();
         this.scene.scale(0.5, 0.5, 0.5);
-        this.scene.setActiveShader(this.bodyShader);
-        this.fishBody.apply();
 
         //-------------body-------------
         this.scene.pushMatrix();
@@ -136,8 +131,6 @@ export class MyFish extends CGFobject
         //------------------------------
 
         this.scene.popMatrix();
-
-        this.scene.defaultAppearance.apply();
     }
 
     animation()

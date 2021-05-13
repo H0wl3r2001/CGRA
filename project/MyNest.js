@@ -31,8 +31,6 @@ export class MyNest extends CGFobject{
         this.nest.display();
 
         this.scene.popMatrix();
-
-        this.scene.setActiveShader(this.scene.defaultShader);
     }
 
     updateTexCoords(coords) {
