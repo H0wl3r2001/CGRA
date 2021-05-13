@@ -79,7 +79,7 @@ export class MyScene extends CGFscene {
         this.seaFloor = new MySeaFloor(this);
         this.nest = new MyNest(this);
         this.sky = new MySky(this);
-        this.rockSet = new MyRockSet(this);
+        this.rockSet = new MyRockSet(this, 200);
 
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);

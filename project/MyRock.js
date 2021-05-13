@@ -7,13 +7,10 @@ export class MyRock extends CGFobject {
    * @param  {integer} slices - number of slices around Y axis
    * @param  {integer} stacks - number of stacks along Y axis, from the center to the poles (half of sphere)
    */
-  constructor(scene, slices, stacks, xPos, yPos, zPos) {
+  constructor(scene, slices, stacks) {
     super(scene);
     this.latDivs = stacks * 2;
     this.longDivs = slices;
-    this.xPos = xPos;
-    this.yPos = yPos;
-    this.zPos = zPos;
 
     this.initBuffers();
   }
@@ -50,20 +47,29 @@ export class MyRock extends CGFobject {
       for (let longitude = 0; longitude <= this.longDivs; longitude++) {
 
         //--- Vertices coordinates
-        // var x = Math.cos(theta) * sinPhi;
-        // var y = cosPhi;
-        // var z = Math.sin(-theta) * sinPhi;
-        var x = this.xPos + Math.cos(theta) * sinPhi;
-        var y = this.yPos + cosPhi;
-        var z = this.zPos +Math.sin(-theta) * sinPhi;
+        var x = Math.cos(theta) * sinPhi;
+        var y = cosPhi;
+        var z = Math.sin(-theta) * sinPhi;
         
         //modify vertices
-        let rand = (Math.random() * 0.6) -0.3;
-        x += Math.sin(theta) * rand;
-        y += Math.sin(phi) * rand;
-        z += Math.cos(theta) * rand;
+        let rand = (Math.random() * 0.4) - 0.2;
 
-        this.vertices.push(x, y, z);
+        let vertX = x + rand * x;
+        let vertY = y + rand * y;
+        let vertZ = z + rand * z;
+
+        if(longitude == 0){
+          var firstX = vertX;
+          var firstY = vertY;
+          var firstZ = vertZ;
+          this.vertices.push(firstX, firstY, firstZ);
+        }
+        else if(longitude == this.longDivs){
+          this.vertices.push(firstX, firstY, firstZ);
+        }
+        else{
+          this.vertices.push(vertX, vertY, vertZ);
+        }
 
         // Texture coordinates
         this.texCoords.push(textmaplong, textmaplat);
