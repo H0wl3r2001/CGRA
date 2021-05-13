@@ -2,11 +2,11 @@ attribute vec3 aVertexPosition;
 attribute vec3 aVertexNormal;
 attribute vec2 aTextureCoord;
 
-uniform mat4 uMVMatrix;         //model view matrix
-uniform mat4 uPMatrix;          //projection matrix
-uniform mat4 uNMatrix;          //normal transformation matrix
+uniform mat4 uMVMatrix;
+uniform mat4 uPMatrix;
+uniform mat4 uNMatrix;
 
-varying vec2 vTextureCoord;     //how does this differ from aTextureCoord? I think it's just a temp variable so we don't alter the original one
+varying vec2 vTextureCoord;
 
 void main() {
         vTextureCoord = aTextureCoord;  

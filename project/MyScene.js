@@ -6,6 +6,7 @@ import {MyCylinder} from "./MyCylinder.js";
 import { MyFish } from "./MyFish.js";
 import { MySeaFloor } from "./MySeaFloor.js";
 import { MyNest } from "./MyNest.js";
+import { MySky } from "./MySky.js";
 
 /**
 * MyScene
@@ -76,6 +77,7 @@ export class MyScene extends CGFscene {
         this.fish = new MyFish(this, 16, 8);
         this.seaFloor = new MySeaFloor(this);
         this.nest = new MyNest(this);
+        this.sky = new MySky(this);
 
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -135,6 +137,8 @@ export class MyScene extends CGFscene {
         this.movingObject.update();
 
         this.fish.animation();
+
+        this.sky.waterShader.setUniformsValues({ timeFactor: t % 100000 });
     }
 
     changeText()
@@ -186,6 +190,7 @@ export class MyScene extends CGFscene {
 
         //fish
         this.fish.display();
+        this.sky.display();
 
 
         //display moving object

@@ -9,8 +9,12 @@ export class MySeaFloor extends CGFobject{
     constructor(scene){
         super(scene);
         this.sandFloor = new MyPlane(scene, 50, 0, 1, 0 , 1);
-        this.sandShader = new CGFshader(this.scene.gl, "shader/sandFloor.vert", "shader/sandFloor.frag");
+        this.initShaders();
         this.initMaterials();
+    }
+
+    initShaders(){
+        this.sandShader = new CGFshader(this.scene.gl, "shader/sandFloor.vert", "shader/sandFloor.frag");
     }
 
     initMaterials()
