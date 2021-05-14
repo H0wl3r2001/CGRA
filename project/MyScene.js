@@ -8,6 +8,7 @@ import { MySeaFloor } from "./MySeaFloor.js";
 import { MyNest } from "./MyNest.js";
 import { MySky } from "./MySky.js";
 import { MyRockSet } from "./MyRockSet.js";
+import {MyPillarSet} from "./MyPillarSet.js";
 
 /**
 * MyScene
@@ -80,6 +81,7 @@ export class MyScene extends CGFscene {
         this.nest = new MyNest(this);
         this.sky = new MySky(this);
         this.rockSet = new MyRockSet(this, 200);
+        this.pillarSet = new MyPillarSet(this);
 
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -175,6 +177,7 @@ export class MyScene extends CGFscene {
         //---OBJECTS NOT USING SHADERS---
         this.skyBox.display();
         this.rockSet.display();
+        this.pillarSet.display();
 
         //---OBJECTS USING SHADERS-------
         //ambient
