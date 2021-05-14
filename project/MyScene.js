@@ -111,6 +111,7 @@ export class MyScene extends CGFscene {
         this.displaySphere = false;
         this.displayCylinder = false;
         this.fric = 0.005;
+        this.scaleFactor = 1;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -217,6 +218,8 @@ export class MyScene extends CGFscene {
         this.rotate(this.movingObject.ang,0, 1, 0);
         this.rotate(Math.PI/2,1,0,0);
         if(this.displayMovingObject){
+            this.pushMatrix();
+            this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
             this.movingObject.display();
         }
         this.popMatrix();
