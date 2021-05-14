@@ -12,6 +12,7 @@ export class MyMovingObject extends CGFobject {
         this.slices = slices;
         this.stacks = stacks;
         this.v = 0.0;
+        this.speedFactor = 1;
         this.x = 0;
         this.y = 0;
         this.z = 0;
@@ -83,8 +84,8 @@ export class MyMovingObject extends CGFobject {
     }
 
     update(){
-        this.x += this.v*Math.sin(this.ang);
-        this.z += this.v*Math.cos(this.ang);
+        this.x += this.v*this.speedFactor*Math.sin(this.ang);
+        this.z += this.v*this.speedFactor*Math.cos(this.ang);
     }
 
     turn(val){
