@@ -7,12 +7,12 @@ import {CGFobject} from '../lib/CGF.js';
  * @param stacks - number of divisions along the Y axis
 */
 export class MyMovingObject extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, slices, stacks, speedFactor) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
         this.v = 0.0;
-        this.speedFactor = 1;
+        this.speedFactor = speedFactor;
         this.x = 0;
         this.y = 0;
         this.z = 0;

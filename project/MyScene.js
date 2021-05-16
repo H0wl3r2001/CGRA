@@ -75,7 +75,8 @@ export class MyScene extends CGFscene {
         this.skyBox = new MyCubeMap(this, this.texlists[this.selectedTexture]);
         this.cylinder = new MyCylinder(this, 6);
         this.incompleteSphere = new MySphere(this, 16, 8);
-        this.movingObject = new MyMovingObject(this,4,1);
+        this.speedFactor = 1;
+        this.movingObject = new MyMovingObject(this,4,1,this.speedFactor);
         this.fish = new MyFish(this, 16, 8);
         this.seaFloor = new MySeaFloor(this);
         this.nest = new MyNest(this);
