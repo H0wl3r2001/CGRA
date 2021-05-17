@@ -9,6 +9,7 @@ import { MyNest } from "./MyNest.js";
 import { MySky } from "./MySky.js";
 import { MyRockSet } from "./MyRockSet.js";
 import {MyPillarSet} from "./MyPillarSet.js";
+import {MyAlgaeCluster} from "./MyAlgaeCluster.js";
 
 /**
 * MyScene
@@ -81,7 +82,8 @@ export class MyScene extends CGFscene {
         this.seaFloor = new MySeaFloor(this);
         this.nest = new MyNest(this);
         this.sky = new MySky(this);
-        this.rockSet = new MyRockSet(this, 200);
+        this.rockSet = new MyRockSet(this, 20);
+        this.algae = new MyAlgaeCluster(this, 6);
         this.pillarSet = new MyPillarSet(this);
 
         this.defaultAppearance = new CGFappearance(this);
@@ -184,6 +186,7 @@ export class MyScene extends CGFscene {
         //---OBJECTS USING SHADERS-------
         //ambient
         this.seaFloor.display();
+        //this.algae.display();
         this.sky.display();
         this.nest.display();
 
