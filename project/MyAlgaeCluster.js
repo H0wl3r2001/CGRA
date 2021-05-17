@@ -54,7 +54,7 @@ export class MyAlgaeCluster extends CGFobject
                 this.scene.setActiveShader(this.shaders[this.randIndices[i + k]]);
                 this.scene.pushMatrix();
                 this.scene.translate(this.randOffsets[i + k][0], 0, this.randOffsets[i + k][1]);
-                this.scene.scale(0.1, 1, 0.1);
+                this.scene.scale(this.randOffsets[i + k][1]*0.1, this.randOffsets[i + k][1]*1, this.randOffsets[i + k][0]*0.1);
                 this.algae.display();
                 this.scene.popMatrix();
                 this.scene.setActiveShader(this.scene.defaultShader);
