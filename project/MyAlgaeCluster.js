@@ -40,11 +40,10 @@ export class MyAlgaeCluster extends CGFobject
         this.green3.setSpecular(0.3, 0.58, 0.13, 1);
         this.green3.setShininess(120);
 
-        this.shaders = [];
-
-        this.shaders.push(this.green1);
-        this.shaders.push(this.green2);
-        this.shaders.push(this.green3);
+        this.appearences = [];
+        this.appearences.push(this.green1);
+        this.appearences.push(this.green2);
+        this.appearences.push(this.green3);
         
         for(let i = 0; i < this.numClust * 4; i++)
         {
@@ -73,7 +72,7 @@ export class MyAlgaeCluster extends CGFobject
             for(let k = 0; k < 4; k++)
             {   
                 //this.scene.setActiveShaderSimple(this.shaders[this.randIndices[i + k]]);
-                this.shaders[this.randIndices[i*4 + k]].apply();
+                this.appearences[this.randIndices[i*4 + k]].apply();
                 this.scene.pushMatrix();
                 this.scene.translate(this.randOffsets[i*4 + k][0], 0, this.randOffsets[i*4 + k][1]);
                 this.scene.scale(this.randOffsets[i*4 + k][1]*0.1, this.randOffsets[i*4 + k][1]*1, this.randOffsets[i*4 + k][0]*0.1);
