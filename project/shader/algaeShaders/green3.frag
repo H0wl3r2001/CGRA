@@ -23,5 +23,5 @@ uniform lightProperties uLight[NUMBER_OF_LIGHTS];
 varying vec4 coords;
 
 void main() {
-    gl_FragColor = vec4(0.45, 0.85, 0.2, 1);
+    gl_FragColor = vec4(0.3, 0.58, 0.13, 1);
 }

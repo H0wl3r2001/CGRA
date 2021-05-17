@@ -182,11 +182,11 @@ export class MyScene extends CGFscene {
         this.skyBox.display();
         this.rockSet.display();
         this.pillarSet.display();
+        this.algae.display();
 
         //---OBJECTS USING SHADERS-------
         //ambient
         this.seaFloor.display();
-        this.algae.display();
         this.sky.display();
         this.nest.display();
 
