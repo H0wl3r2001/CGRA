@@ -35,7 +35,7 @@ export class MyAlgaeCluster extends CGFobject
     {
         for(let i = 0; i < this.numClust; i++)
         {
-            this.clustCenter.push([(Math.random() * 50) - 20, (Math.random() * 50) - 20]);
+            this.clustCenter.push([(Math.random() * 50) - 25, (Math.random() * 50) - 25]);
         }
         for(let i = 0; i < this.numClust*4; i++)
         {

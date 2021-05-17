@@ -83,7 +83,7 @@ export class MyScene extends CGFscene {
         this.nest = new MyNest(this);
         this.sky = new MySky(this);
         this.rockSet = new MyRockSet(this, 5);
-        this.algae = new MyAlgaeCluster(this, 10);
+        this.algae = new MyAlgaeCluster(this, 5);
         this.pillarSet = new MyPillarSet(this);
 
         this.defaultAppearance = new CGFappearance(this);
