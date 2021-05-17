@@ -22,19 +22,19 @@ export class MyAlgaeCluster extends CGFobject
         this.green2 = new CGFshader(this.scene.gl, "shader/algaeShaders/green2.vert", "shader/algaeShaders/green2.frag");
         this.green3 = new CGFshader(this.scene.gl, "shader/algaeShaders/green3.vert", "shader/algaeShaders/green3.frag");
         */
-        this.green1 = new CGFappearance(this);
+        this.green1 = new CGFappearance(this.scene);
         this.green1.setAmbient(0.53, 0.83, 0.26, 1);
         this.green1.setDiffuse(0.53, 0.83, 0.26, 1);
         this.green1.setSpecular(0.53, 0.83, 0.26, 1);
         this.green1.setShininess(120);
 
-        this.green2 = new CGFappearance(this);
+        this.green2 = new CGFappearance(this.scene);
         this.green2.setAmbient(0.72, 0.97, 0.5, 1);
         this.green2.setDiffuse(0.72, 0.97, 0.5, 1);
         this.green2.setSpecular(0.72, 0.97, 0.5, 1);
         this.green2.setShininess(120);
 
-        this.green3 = new CGFappearance(this);
+        this.green3 = new CGFappearance(this.scene);
         this.green3.setAmbient(0.3, 0.58, 0.13, 1);
         this.green3.setDiffuse(0.3, 0.58, 0.13, 1);
         this.green3.setSpecular(0.3, 0.58, 0.13, 1);
