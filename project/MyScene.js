@@ -82,8 +82,8 @@ export class MyScene extends CGFscene {
         this.seaFloor = new MySeaFloor(this);
         this.nest = new MyNest(this);
         this.sky = new MySky(this);
-        this.rockSet = new MyRockSet(this, 20);
-        this.algae = new MyAlgaeCluster(this, 6);
+        this.rockSet = new MyRockSet(this, 5);
+        this.algae = new MyAlgaeCluster(this, 10);
         this.pillarSet = new MyPillarSet(this);
 
         this.defaultAppearance = new CGFappearance(this);
@@ -186,7 +186,7 @@ export class MyScene extends CGFscene {
         //---OBJECTS USING SHADERS-------
         //ambient
         this.seaFloor.display();
-        //this.algae.display();
+        this.algae.display();
         this.sky.display();
         this.nest.display();
 
