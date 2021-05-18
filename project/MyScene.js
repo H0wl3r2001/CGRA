@@ -10,6 +10,7 @@ import { MySky } from "./MySky.js";
 import { MyRockSet } from "./MyRockSet.js";
 import {MyPillarSet} from "./MyPillarSet.js";
 import {MyAlgaeCluster} from "./MyAlgaeCluster.js";
+import { MyMovingFish } from "./MyMovingFish.js";
 
 /**
 * MyScene
@@ -85,6 +86,7 @@ export class MyScene extends CGFscene {
         this.rockSet = new MyRockSet(this, 5);
         this.algae = new MyAlgaeCluster(this, 5);
         this.pillarSet = new MyPillarSet(this);
+        this.fishCtrl = new MyMovingFish(this, 16, 8, this.speedFactor);
 
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -196,7 +198,8 @@ export class MyScene extends CGFscene {
         //to draw an element of its body
         this.pushMatrix();
         this.translate(0, 2, 0);
-        this.fish.display();
+        //this.fish.display();
+        this.fishCtrl.display();
         this.popMatrix();
 
         //reset scene appearance
