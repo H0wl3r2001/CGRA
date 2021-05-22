@@ -12,10 +12,11 @@ export class MyMovingObject extends CGFobject {
         this.slices = slices;
         this.stacks = stacks;
         this.v = 0.0;
+        this.vY = 0.0;
         this.speedFactor = speedFactor;
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
+        this.x = 0.0;
+        this.y = 0.0;
+        this.z = 0.0;
         this.ang = 0;
         this.initBuffers();
     }
@@ -84,7 +85,13 @@ export class MyMovingObject extends CGFobject {
     }
 
     update(){
+        if(this.y < 0.0 || this.y > 5.0){   //for some reason I'm not entirely sure of, == 0.0/5.0 does not work
+            this.vY = 0;
+        }
         this.x += this.v*this.speedFactor*Math.sin(this.ang);
+        //if we can move on the Y axis
+        if(this.y + this.vY*this.speedFactor > 0.0 && this.y + this.vY*this.speedFactor < 5.0)
+            this.y += this.vY*this.speedFactor;
         this.z += this.v*this.speedFactor*Math.cos(this.ang);
     }
 
@@ -96,16 +103,17 @@ export class MyMovingObject extends CGFobject {
         this.v += val;
     }
 
+    accelerateY(val){
+        this.vY = val;
+    }
+
     reset(){
         this.x = 0;
         this.y = 0;
         this.z = 0;
         this.v = 0;
+        this.vY = 0;
         this.ang = 0;
-    }
-
-    setY(val){
-        this.y = val;
     }
     
     //---not in the specification:---

@@ -32,7 +32,7 @@ export class MyRockSet extends CGFobject{
     initRocks(){
         for(let i = 0; i < this.rockNum; i++){
             this.rocks.push(new MyRock(this.scene, 16, 8));
-            this.rockPos.push([(Math.random() * 50) - 25, 1, (Math.random() * 50) - 25]);
+            this.rockPos.push([(Math.random() * 50) - 25, 0.7, (Math.random() * 50) - 25]);
             this.rockScale.push([Math.random() * 0.3 + 0.1, Math.random() * 0.3 + 0.1, Math.random() * 0.3 + 0.1]);
         }
     }

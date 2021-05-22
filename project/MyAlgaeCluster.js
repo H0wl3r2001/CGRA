@@ -17,11 +17,7 @@ export class MyAlgaeCluster extends CGFobject
     }
 
     initShaders()
-    {   /*
-        this.green1 = new CGFshader(this.scene.gl, "shader/algaeShaders/green1.vert", "shader/algaeShaders/green1.frag");
-        this.green2 = new CGFshader(this.scene.gl, "shader/algaeShaders/green2.vert", "shader/algaeShaders/green2.frag");
-        this.green3 = new CGFshader(this.scene.gl, "shader/algaeShaders/green3.vert", "shader/algaeShaders/green3.frag");
-        */
+    {
         this.green1 = new CGFappearance(this.scene);
         this.green1.setAmbient(0.53, 0.83, 0.26, 1);
         this.green1.setDiffuse(0.53, 0.83, 0.26, 1);
@@ -40,10 +36,7 @@ export class MyAlgaeCluster extends CGFobject
         this.green3.setSpecular(0.3, 0.58, 0.13, 1);
         this.green3.setShininess(120);
 
-        this.appearences = [];
-        this.appearences.push(this.green1);
-        this.appearences.push(this.green2);
-        this.appearences.push(this.green3);
+        this.appearences = [this.green1, this.green2, this.green3];
         
         for(let i = 0; i < this.numClust * 4; i++)
         {
@@ -71,14 +64,12 @@ export class MyAlgaeCluster extends CGFobject
             this.scene.translate(this.clustCenter[i][0], 0.5, this.clustCenter[i][1]);
             for(let k = 0; k < 4; k++)
             {   
-                //this.scene.setActiveShaderSimple(this.shaders[this.randIndices[i + k]]);
                 this.appearences[this.randIndices[i*4 + k]].apply();
                 this.scene.pushMatrix();
                 this.scene.translate(this.randOffsets[i*4 + k][0], 0, this.randOffsets[i*4 + k][1]);
                 this.scene.scale(this.randOffsets[i*4 + k][1]*0.1, this.randOffsets[i*4 + k][1]*1, this.randOffsets[i*4 + k][0]*0.1);
                 this.algae.display();
                 this.scene.popMatrix();
-                //this.scene.setActiveShaderSimple(this.scene.defaultShader);
             }
             this.scene.popMatrix();
             

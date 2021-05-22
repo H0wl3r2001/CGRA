@@ -79,14 +79,14 @@ export class MyScene extends CGFscene {
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.speedFactor = 1;
         this.movingObject = new MyMovingObject(this,4,1,this.speedFactor);
-        this.fish = new MyFish(this, 16, 8);
+        // this.fish = new MyFish(this, 16, 8);
         this.seaFloor = new MySeaFloor(this);
         this.nest = new MyNest(this);
         this.sky = new MySky(this);
-        this.rockSet = new MyRockSet(this, 5);
-        this.algae = new MyAlgaeCluster(this, 5);
+        this.rockSet = new MyRockSet(this, 60);
+        this.algae = new MyAlgaeCluster(this, 50);
         this.pillarSet = new MyPillarSet(this);
-        this.fishCtrl = new MyMovingFish(this, 16, 8, this.speedFactor);
+        this.movingFish = new MyMovingFish(this, 16, 8, this.speedFactor);
 
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -120,12 +120,12 @@ export class MyScene extends CGFscene {
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
-        this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setAmbient(0.3, 0.3, 0.3, 1.0);
+        this.lights[0].setDiffuse(0.7, 0.7, 0.7, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
     }
     initCameras() {
-        // this.camera = new CGFcamera(1.5, 0.1, 500, vec3.fromValues(2, 2, 2), vec3.fromValues(0, 0, 0));       //CGFcamera(fov,near,far,position,target)
         this.camera = new CGFcamera(1.5, 0.1, 500, vec3.fromValues(3, 6, 3), vec3.fromValues(0, 1, 0));       //CGFcamera(fov,near,far,position,target)
     }
 
@@ -144,9 +144,13 @@ export class MyScene extends CGFscene {
         //---not in the specification:---
         this.movingObject.friction();
         //-------------------------------
-        this.movingObject.update();
+        if(this.displayMovingObject)
+            this.movingObject.update();
 
-        this.fish.animation();
+        // this.fish.animation();
+        this.movingFish.update();
+        this.movingFish.animation();
+
 
         this.sky.waterShader.setUniformsValues({ timeFactor: t % 100000 });
     }
@@ -198,15 +202,15 @@ export class MyScene extends CGFscene {
         //to draw an element of its body
         this.pushMatrix();
         this.translate(0, 2, 0);
-        //this.fish.display();
-        this.fishCtrl.display();
+        // this.fish.display();
+        this.movingFish.display();
         this.popMatrix();
 
         //reset scene appearance
         this.defaultAppearance.apply();
 
 
-        //Mario: do we really need to keep these objects (globe, cylinder and movingObject)?
+        //---Part 1 objects
         this.sphereEarth.apply();
         if(this.displaySphere){
             //This sphere does not have defined texture coordinates
@@ -241,44 +245,58 @@ export class MyScene extends CGFscene {
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")){
             text+=" W ";
-            this.movingObject.accelerate(0.01);
+            if(this.displayMovingObject)
+                this.movingObject.accelerate(0.01);
+            this.movingFish.accelerate(0.01);
             keysPressed = true;
         }
 
         if(this.gui.isKeyPressed("KeyS")){
             text+= " S ";
-            this.movingObject.accelerate(-0.01);
+            if(this.displayMovingObject)
+                this.movingObject.accelerate(-0.01);
+            this.movingFish.accelerate(-0.01);
             keysPressed = true;
         }
 
         if(this.gui.isKeyPressed("KeyA")){
             text+= " A ";
-            this.movingObject.turn(Math.PI/16);
+            if(this.displayMovingObject)
+                this.movingObject.turn(Math.PI/16);
+            this.movingFish.turn(Math.PI/16);
             keysPressed = true;
         }
 
         if(this.gui.isKeyPressed("KeyD")){
             text+= " D ";
-            this.movingObject.turn(-Math.PI/16);
+            if(this.displayMovingObject)
+                this.movingObject.turn(-Math.PI/16);
+            this.movingFish.turn(-Math.PI/16);
             keysPressed = true;
         }
 
         if(this.gui.isKeyPressed("KeyP")){
             text += " P ";
-            this.movingObject.setY(3);
+            if(this.displayMovingObject)
+                this.movingObject.accelerateY(0.1);
+            this.movingFish.accelerateY(0.1);
             keysPressed = true;
         }
 
         if(this.gui.isKeyPressed("KeyL")){
             text += " L ";
-            this.movingObject.setY(-3);
+            if(this.displayMovingObject)
+            this.movingObject.accelerateY(-0.1);
+        this.movingFish.accelerateY(-0.1);
             keysPressed = true;
         }
 
 
         if(this.gui.isKeyPressed("KeyR")){
             text += " R ";
-            this.movingObject.reset();
+            if(this.displayMovingObject)
+                this.movingObject.reset();
+            this.movingFish.reset();
             keysPressed = true;
         }
 
