@@ -135,7 +135,7 @@ export class MyFish extends CGFobject
         this.scene.popMatrix();
     }
 
-    animation(scale)
+    animation(scale, state)
     {
         if(this.anglBack >= Math.PI/9) //20 degrees
             this.directionBack = -1;
@@ -155,8 +155,25 @@ export class MyFish extends CGFobject
         else if(this.anglSideL <= -Math.PI/12)
             this.directionSideL = 1;
 
+        if(state == 0)
+        {
+            this.anglSideR += this.directionSideR*2*(Math.PI/180);
+            this.anglSideL += this.directionSideL*2*(Math.PI/180); //one side does the opposite of the other
+        }
+
+        else if(state == 1)
+        {
+            this.anglSideR += this.directionSideR*2*(Math.PI/180);
+            this.anglSideL += this.directionSideL*0*(Math.PI/180); //one side does the opposite of the other
+        }
+
+        else if(state == 2)
+        {
+            this.anglSideR += this.directionSideR*0*(Math.PI/180);
+            this.anglSideL += this.directionSideL*2*(Math.PI/180); //one side does the opposite of the other
+        }
+
         this.anglBack += this.directionBack*3*(scale+1)*(Math.PI/180);
-        this.anglSideR += this.directionSideR*2*(Math.PI/180);
-        this.anglSideL += this.directionSideL*2*(Math.PI/180); //one side does the opposite of the other
+        
     }
 }

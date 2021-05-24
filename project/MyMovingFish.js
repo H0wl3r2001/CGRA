@@ -7,6 +7,7 @@ export class MyMovingFish extends MyMovingObject
     {
         super(scene, slices, stacks, speedFactor);
         this.model = new MyFish(scene, slices, stacks);
+        this.state = 0; //0 if still, 1 if left-turning, 2 if right turning
     }
 
     init_pos(){
@@ -27,6 +28,6 @@ export class MyMovingFish extends MyMovingObject
 
     animation()
     {
-        this.model.animation(this.speedFactor);
+        this.model.animation(this.speedFactor, this.state);
     }
 }
