@@ -135,7 +135,7 @@ export class MyFish extends CGFobject
         this.scene.popMatrix();
     }
 
-    animation()
+    animation(scale)
     {
         if(this.anglBack >= Math.PI/9) //20 degrees
             this.directionBack = -1;
@@ -155,7 +155,7 @@ export class MyFish extends CGFobject
         else if(this.anglSideL <= -Math.PI/12)
             this.directionSideL = 1;
 
-        this.anglBack += this.directionBack*3*(Math.PI/180);
+        this.anglBack += this.directionBack*3*(scale+1)*(Math.PI/180);
         this.anglSideR += this.directionSideR*2*(Math.PI/180);
         this.anglSideL += this.directionSideL*2*(Math.PI/180); //one side does the opposite of the other
     }
