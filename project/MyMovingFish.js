@@ -28,6 +28,6 @@ export class MyMovingFish extends MyMovingObject
 
     animation()
     {
-        this.model.animation(this.speedFactor, this.state);
+        this.model.animation(this.v, this.state);
     }
 }
