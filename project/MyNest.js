@@ -11,8 +11,15 @@ export class MyNest extends CGFobject{
     constructor(scene){
         super(scene);
         this.nest = new MySphere(this.scene, 16, 8);
+        this.nestPos = [];
         this.nestShader = new CGFshader(this.scene.gl, "shader/nestShader.vert", "shader/nestShader.frag");
         this.initMaterials();
+        this.initPos();
+    }
+
+    initPos()
+    {
+        this.nestPos.push(-10,1.8,5);
     }
 
     initMaterials()
@@ -27,7 +34,7 @@ export class MyNest extends CGFobject{
 
         this.scene.pushMatrix();
 
-        this.scene.translate(-10,1.2,5);
+        this.scene.translate(this.nestPos[0], this.nestPos[1], this.nestPos[2]);
         this.scene.scale(2,2,2);
         this.nest.display();
 
