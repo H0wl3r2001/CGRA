@@ -7,6 +7,7 @@ import { MyFish } from "./MyFish.js";
 import { MySeaFloor } from "./MySeaFloor.js";
 import { MyNest } from "./MyNest.js";
 import { MySky } from "./MySky.js";
+import {MyRock} from "./MyRock.js";
 import { MyRockSet } from "./MyRockSet.js";
 import {MyPillarSet} from "./MyPillarSet.js";
 import {MyAlgaeCluster} from "./MyAlgaeCluster.js";
@@ -83,6 +84,7 @@ export class MyScene extends CGFscene {
         this.seaFloor = new MySeaFloor(this);
         this.nest = new MyNest(this);
         this.sky = new MySky(this);
+        this.rock = new MyRock(this, 16, 8); //Rock used for testing hypothesis
         this.rockSet = new MyRockSet(this, 60);
         this.algae = new MyAlgaeCluster(this, 50);
         this.pillarSet = new MyPillarSet(this);
@@ -186,6 +188,7 @@ export class MyScene extends CGFscene {
 
         //---OBJECTS NOT USING SHADERS---
         this.skyBox.display();
+        //this.rock.display();
         this.rockSet.display();
         this.pillarSet.display();
         this.algae.display();
