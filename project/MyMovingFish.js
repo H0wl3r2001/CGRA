@@ -7,7 +7,6 @@ export class MyMovingFish extends MyMovingObject
     {
         super(scene, slices, stacks, speedFactor);
         this.model = new MyFish(scene, slices, stacks);
-        this.state = 0; //0 if still, 1 if left-turning, 2 if right turning
         this.rockInMouth = [];
     }
 
@@ -34,6 +33,6 @@ export class MyMovingFish extends MyMovingObject
 
     animation()
     {
-        this.model.animation(this.v, this.state);
+        this.model.animation(this.v * 5, this.state);
     }
 }

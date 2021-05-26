@@ -18,6 +18,7 @@ export class MyMovingObject extends CGFobject {
         this.y = 0.0;
         this.z = 0.0;
         this.ang = 0;
+        this.state = 0; //0 if still, 1 if left-turning, 2 if right turning
         this.initBuffers();
     }
     initBuffers() {
@@ -96,6 +97,13 @@ export class MyMovingObject extends CGFobject {
     }
 
     turn(val){
+        if(val > 0)
+            this.state = 1;
+        else if(val < 0)
+            this.state = 2;
+        else
+            this.state = 0;
+            
         this.ang += val;
     }
 

@@ -163,14 +163,14 @@ export class MyFish extends CGFobject
 
         else if(state == 1)
         {
-            this.anglSideR += this.directionSideR*2*(Math.PI/180);
+            this.anglSideR += this.directionSideR*2*(Math.PI/180) * (scale + 1);
             this.anglSideL += 0; //one side does the opposite of the other
         }
 
         else if(state == 2)
         {
             this.anglSideR += 0;
-            this.anglSideL += this.directionSideL*2*(Math.PI/180); //one side does the opposite of the other
+            this.anglSideL += this.directionSideL*2*(Math.PI/180) * (scale + 1); //one side does the opposite of the other
         }
 
         this.anglBack += this.directionBack*3*(scale+1)*(Math.PI/180);

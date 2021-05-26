@@ -250,7 +250,6 @@ export class MyScene extends CGFscene {
             text+=" W ";
             if(this.displayMovingObject)
                 this.movingObject.accelerate(0.01);
-            this.movingFish.state = 0;
             this.movingFish.accelerate(0.01);
             keysPressed = true;
         }
@@ -259,16 +258,17 @@ export class MyScene extends CGFscene {
             text+= " S ";
             if(this.displayMovingObject)
                 this.movingObject.accelerate(-0.01);
-            this.movingFish.state = 0;
             this.movingFish.accelerate(-0.01);
             keysPressed = true;
         }
+
+        if(!this.gui.isKeyPressed("KeyA") || !this.gui.isKeyPressed("KeyD"))
+            this.movingFish.turn(0);    
 
         if(this.gui.isKeyPressed("KeyA")){
             text+= " A ";
             if(this.displayMovingObject)
                 this.movingObject.turn(Math.PI/16);
-            this.movingFish.state = 1;
             this.movingFish.turn(Math.PI/16);
             keysPressed = true;
         }
@@ -277,7 +277,6 @@ export class MyScene extends CGFscene {
             text+= " D ";
             if(this.displayMovingObject)
                 this.movingObject.turn(-Math.PI/16);
-            this.movingFish.state = 2;
             this.movingFish.turn(-Math.PI/16);
             keysPressed = true;
         }
@@ -306,10 +305,6 @@ export class MyScene extends CGFscene {
             this.movingFish.reset();
             keysPressed = true;
         }
-
-        //tecla c
-
-        this.movingFish.state = 0;
 
         if(keysPressed)
             console.log(text);
