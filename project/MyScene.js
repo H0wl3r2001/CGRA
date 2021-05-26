@@ -307,6 +307,8 @@ export class MyScene extends CGFscene {
             keysPressed = true;
         }
 
+        //tecla c
+
         this.movingFish.state = 0;
 
         if(keysPressed)
