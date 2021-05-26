@@ -167,6 +167,7 @@ export class MyMovingObject extends CGFobject {
             this.scene.translate(mouth[1][0], mouth[1][1], mouth[1][2]);
             this.r.display();
             this.scene.popMatrix();
+            mouth = [];
         }
     }
     
