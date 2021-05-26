@@ -7,7 +7,7 @@ export class MyMovingFish extends MyMovingObject
     {
         super(scene, slices, stacks, speedFactor);
         this.model = new MyFish(scene, slices, stacks);
-        this.rockInMouth = [];
+        this.rockInMouth = []; //0 will be the object; 1 will be the position; 2 will be the scale; 3 will be the index pointing to the rockSet arrays.
     }
 
     init_pos(){
@@ -23,11 +23,14 @@ export class MyMovingFish extends MyMovingObject
         this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.ang, 0, 1, 0);
         this.model.display();
-        /*
-        this.rockInMouth[0].translate(0,0,2);
-        falta scale
-        this.rockInMouth[0].display();
-        */
+        if(this.rockInMouth.length != 0)
+        {
+            
+            this.scene.translate(0,0,2);
+            this.scene.scale(this.rockInMouth[2][0], this.rockInMouth[2][1], this.rockInMouth[2][2])
+            this.rockInMouth[0].display();
+        }
+        
         this.scene.popMatrix();
     }
 
