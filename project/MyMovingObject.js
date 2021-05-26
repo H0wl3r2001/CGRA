@@ -1,4 +1,5 @@
 import {CGFobject} from '../lib/CGF.js';
+import { MyRock } from './MyRock.js';
 /**
 * MyMovingObject
 * @constructor
@@ -115,13 +116,58 @@ export class MyMovingObject extends CGFobject {
         this.vY = val;
     }
 
-    reset(){
+     /**
+     * checks if a rock is 1.5 units away from fish and if it is, puts that rock in the vector that will disply it in the mouth,
+     * and also eliminates that same rock from all the arrays that have its info on the rockSet
+     * @param {*} rockArray - The array that contains all the rocks from a set.
+     * @param {*} rockPosArray - The array that contains all the rocks's initial positions from a set.
+     * @param {*} rockScaleArray - The array that contains all the rocks's scales from a set.
+     */
+    collect(rockArray, rockPosArray, rockScaleArray, mouth)
+    {
+        for(let i = 0; i < rockArray.length; i++)
+        {
+            if((rockPosArray[i][0]-this.x + rockPosArray[i][2]-this.z)**2 == 1.5**2)
+            {
+                mouth.push(rockArray[i]);
+                mouth.push(rockPosArray[i]);
+                mouth.push(rockScaleArray[i]);
+                mouth.push(i);
+                rockArray.splice(i, 1);
+                rockPosArray.splice(i, 1);
+                rockScaleArray.splice(i, 1);
+                break;
+            }
+        }
+    }
+  
+    /**
+     * Must return a hypothetical rock in the fish's mouth to its original position.
+     * @param {*} mouth - an array that contains the object, the original position, the scale and the original index of the rockSet.
+     */
+    reset(mouth){
         this.x = 0;
         this.y = 0;
         this.z = 0;
         this.v = 0;
         this.vY = 0;
         this.ang = 0;
+        if(mouth.length != 0)
+        {
+            this.rockMat = new CGFappearance(this.scene);
+            this.rockMat.setAmbient(0.4, 0.4, 0.4, 1);
+            this.rockMat.setDiffuse(0.4, 0.4, 0.4, 1);
+            this.rockMat.setSpecular(0.4, 0.4, 0.4, 1);
+            this.rockMat.setShininess(120);
+
+            this.r = new MyRock(this.scene, 16, 8); 
+            this.rockMat.apply();
+
+            this.scene.pushMatrix();
+            this.scene.translate(mouth[1][0], mouth[1][1], mouth[1][2]);
+            this.r.display();
+            this.scene.popMatrix();
+        }
     }
     
     //---not in the specification:---

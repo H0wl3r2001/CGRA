@@ -302,7 +302,7 @@ export class MyScene extends CGFscene {
             text += " R ";
             if(this.displayMovingObject)
                 this.movingObject.reset();
-            this.movingFish.reset();
+            this.movingFish.reset(this.rockSet.rockPos,this.movingFish.rockInMouth);
             keysPressed = true;
         }
 
