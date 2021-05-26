@@ -145,7 +145,7 @@ export class MyMovingObject extends CGFobject {
      * Must return a hypothetical rock in the fish's mouth to its original position.
      * @param {*} mouth - an array that contains the object, the original position, the scale and the original index of the rockSet.
      */
-    reset(mouth){
+    reset(rockArray, rockPosArray, rockScaleArray, mouth){
         this.x = 0;
         this.y = 0;
         this.z = 0;
@@ -160,13 +160,17 @@ export class MyMovingObject extends CGFobject {
             this.rockMat.setSpecular(0.4, 0.4, 0.4, 1);
             this.rockMat.setShininess(120);
 
-            this.r = new MyRock(this.scene, 16, 8); 
             this.rockMat.apply();
 
             this.scene.pushMatrix();
             this.scene.translate(mouth[1][0], mouth[1][1], mouth[1][2]);
-            this.r.display();
+            this.scene.scale(mouth[2][0], mouth[2][1], mouth[2][2]);
+            this.mouth[0].display();
             this.scene.popMatrix();
+            
+            rockArray.push(mouth[0]);
+            rockPosArray.push([mouth[1][0], mouth[1][1], mouth[1][2]]);
+            rockScaleArray.push([mouth[2][0], mouth[2][1], mouth[2][2]]);
             mouth = [];
         }
     }
