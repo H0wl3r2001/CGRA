@@ -309,6 +309,9 @@ export class MyScene extends CGFscene {
         if(this.gui.isKeyPressed("KeyC"))
         {
             text += " C ";
+            if(this.movingFish.y == 0 && this.movingFish.rockInMouth.length == 0)
+                this.movingFish.collect(this.rockSet.rocks, this.rockSet.rockPos, this.rockSet.rockScale);
+            keysPressed = true;
         }
 
         if(keysPressed)
