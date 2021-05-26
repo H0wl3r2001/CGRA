@@ -43,9 +43,9 @@ export class MyMovingFish extends MyMovingObject
                 this.rockInMouth.push(rockArray[i]);
                 this.rockInMouth.push(rockPosArray[i]);
                 this.rockInMouth.push(rockScaleArray[i]);
-                rockArray.splice(i);
-                rockPosArray.splice(i);
-                rockScaleArray.splice(i);
+                rockArray.splice(i, 1);
+                rockPosArray.splice(i, 1);
+                rockScaleArray.splice(i, 1);
             }
         }
     }
