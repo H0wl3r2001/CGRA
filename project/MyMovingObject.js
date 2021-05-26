@@ -107,6 +107,11 @@ export class MyMovingObject extends CGFobject {
         this.ang += val;
     }
 
+    collect(rockArray, rockPosArray, rockScaleArray, mouth)
+    {
+
+    }
+
     accelerate(val){
         this.v += val;
     }
