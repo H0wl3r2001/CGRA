@@ -127,7 +127,7 @@ export class MyMovingObject extends CGFobject {
     {
         for(let i = 0; i < rockArray.length; i++)
         {
-            if((rockPosArray[i][0]-this.x + rockPosArray[i][2]-this.z)**2 == 1.5**2)
+            if(Math.pow(rockPosArray[i][0]-this.x + rockPosArray[i][2]-this.z, 2) == Math.pow(1.5,2))
             {
                 mouth.push(rockArray[i]);
                 mouth.push(rockPosArray[i]);
