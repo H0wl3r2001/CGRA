@@ -324,7 +324,8 @@ export class MyScene extends CGFscene {
 
             if(this.movingFish.y < 0.1 && this.movingFish.rockInMouth.length != 0)
             {
-                this.movingFish.putOnNest(this.movingFish.rockInMouth, this.nest.nestPos, this.nest.nestRocks);
+                if(this.nest.nestRocks.length < 10)
+                    this.movingFish.putOnNest(this.movingFish.rockInMouth, this.nest.nestPos, this.nest.nestRocks);
                 //this.movingFish.clean_mouth();
             }
 
