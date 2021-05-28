@@ -33,6 +33,7 @@ export class MyNest extends CGFobject{
     initMaterials()
     {
         this.woodTex = new CGFtexture(this.scene, "images/nest.jpg");
+
     }
     
     display()
@@ -48,12 +49,21 @@ export class MyNest extends CGFobject{
 
         if(this.nestRocks.length != 0)
         {
-            for(let i = 0; i < this.nestRocks.length/2; i+=2)
+            for(let i = 0; i < this.nestRocks.length; i++)
             {
+                /*
+                this.rockMat = new CGFappearance(this.scene);
+                this.rockMat.setAmbient(0.4, 0.4, 0.4, 1);
+                this.rockMat.setDiffuse(0.4, 0.4, 0.4, 1);
+                this.rockMat.setSpecular(0.4, 0.4, 0.4, 1);
+                this.rockMat.setShininess(120);
+                
+                this.rockMat.apply(); //côr não corresponde ao normal das pedras.
+                */
                 this.scene.pushMatrix();
+                this.scene.scale(this.nestRocks[i][1][0], this.nestRocks[i][1][1], this.nestRocks[i][1][2]);
                 this.scene.translate(this.nestRockPos[i][0], this.nestRockPos[i][1], this.nestRockPos[i][2]);
-                this.scene.scale(this.nestRocks[1][0], this.nestRocks[1][1], this.nestRocks[1][2]);
-                this.nestRocks[0].display();
+                this.nestRocks[i][0].display();
                 this.scene.popMatrix();
             }
         }

@@ -39,6 +39,12 @@ export class MyMovingFish extends MyMovingObject
             this.scene.translate(0,-1,0.75);
             this.scene.scale(this.rockInMouth[2][0], this.rockInMouth[2][1], this.rockInMouth[2][2])
             this.rockInMouth[0].display();
+            /*
+            while(this.rockInMouth.length > 0) //nem estando assim resolve
+            {
+                this.rockInMouth.pop();
+            }
+            */
             this.scene.popMatrix();
         }
         
@@ -47,7 +53,19 @@ export class MyMovingFish extends MyMovingObject
 
     clean_mouth()
     {
-        this.rockInMouth = [];
+        while(this.rockInMouth.length > 0)
+        {
+            this.rockInMouth.pop();
+        }
+    }
+
+    //tentei ver se ao fazer outra função igual resolvia o problema, mas não
+    dispose_rock()
+    {
+        while(this.rockInMouth.length > 0)
+        {
+            this.rockInMouth.pop();
+        }
     }
 
     animation()

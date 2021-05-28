@@ -160,14 +160,24 @@ export class MyMovingObject extends CGFobject {
             rockPosArray.push([mouth[1][0], mouth[1][1], mouth[1][2]]);
             rockScaleArray.push([mouth[2][0], mouth[2][1], mouth[2][2]]);
         }
+        
+        
+        while(mouth.length > 0)
+        {
+            mouth.pop();
+        }
     }
 
     putOnNest(mouth, nestPos, nestRocks)
     {
         if(Math.pow(nestPos[0]-this.x, 2) + Math.pow(nestPos[2]-this.z, 2) <= Math.pow(2, 2))
         {
-            nestRocks.push(mouth[0]); //object
-            nestRocks.push(mouth[2]); //scale
+            nestRocks.push([mouth[0], mouth[2]]); //object and scale
+        }
+
+        while(mouth.length > 0)
+        {
+            mouth.pop();
         }
             
     }
