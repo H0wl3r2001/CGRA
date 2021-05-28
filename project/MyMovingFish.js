@@ -36,7 +36,7 @@ export class MyMovingFish extends MyMovingObject
             this.rockMat.apply();
 
             this.scene.pushMatrix();
-            this.scene.translate(0,-1,1);
+            this.scene.translate(0,-1,0.75);
             this.scene.scale(this.rockInMouth[2][0], this.rockInMouth[2][1], this.rockInMouth[2][2])
             this.rockInMouth[0].display();
             this.scene.popMatrix();

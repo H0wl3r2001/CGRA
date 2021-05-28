@@ -156,26 +156,20 @@ export class MyMovingObject extends CGFobject {
         this.ang = 0;
         if(mouth.length != 0)
         {
-            /*
-            this.rockMat = new CGFappearance(this.scene);
-            this.rockMat.setAmbient(0.4, 0.4, 0.4, 1);
-            this.rockMat.setDiffuse(0.4, 0.4, 0.4, 1);
-            this.rockMat.setSpecular(0.4, 0.4, 0.4, 1);
-            this.rockMat.setShininess(120);
-
-            this.rockMat.apply();
-
-            this.scene.pushMatrix();
-            this.scene.translate(mouth[1][0], mouth[1][1], mouth[1][2]);
-            this.scene.scale(mouth[2][0], mouth[2][1], mouth[2][2]);
-            this.mouth[0].display();
-            this.scene.popMatrix();
-            */
-            
             rockArray.push(mouth[0]);
             rockPosArray.push([mouth[1][0], mouth[1][1], mouth[1][2]]);
             rockScaleArray.push([mouth[2][0], mouth[2][1], mouth[2][2]]);
         }
+    }
+
+    putOnNest(mouth, nestPos, nestRocks)
+    {
+        if(Math.pow(nestPos[0]-this.x, 2) + Math.pow(nestPos[2]-this.z, 2) <= Math.pow(2, 2))
+        {
+            nestRocks.push(mouth[0]); //object
+            nestRocks.push(mouth[2]); //scale
+        }
+            
     }
     
     //---not in the specification:---
