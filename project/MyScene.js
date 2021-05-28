@@ -311,9 +311,16 @@ export class MyScene extends CGFscene {
         {
             text += " C ";
             if(this.movingFish.y < 0.1 && this.movingFish.rockInMouth.length == 0)
-                {
-                    this.movingFish.collect(this.rockSet.rocks, this.rockSet.rockPos, this.rockSet.rockScale, this.movingFish.rockInMouth);
-                }
+            {
+                this.movingFish.collect(this.rockSet.rocks, this.rockSet.rockPos, this.rockSet.rockScale, this.movingFish.rockInMouth);
+            }
+            
+            else if(this.movingFish.y < 0.1 && this.movingFish.rockInMouth.length != 0)
+            {
+                this.movingFish.putOnNest(this.movingFish.rockInMouth, this.nest.nestPos, this.nest.nestRocks);
+                //this.movingFish.clean_mouth();
+            }
+
             keysPressed = true;
         }
 

@@ -13,6 +13,7 @@ export class MyNest extends CGFobject{
         this.nest = new MySphere(this.scene, 16, 8);
         this.nestPos = [];
         this.nestRocks = [];
+        this.nestRockPos = [];
         this.nestShader = new CGFshader(this.scene.gl, "shader/nestShader.vert", "shader/nestShader.frag");
         this.initMaterials();
         this.initPos();
@@ -21,6 +22,12 @@ export class MyNest extends CGFobject{
     initPos()
     {
         this.nestPos.push(-10,0.8,5);
+        
+        
+        for(let i = 0; i < 4; i++)
+        {
+            this.nestRockPos.push([Math.floor(Math.random() * 2), 0, Math.floor(Math.random() * 2)]);
+        }
     }
 
     initMaterials()
@@ -40,10 +47,10 @@ export class MyNest extends CGFobject{
         this.nest.display();
         if(this.nestRocks.length != 0)
         {
-            for(let i = 0; i < this.nestRocks.length; i++)
+            for(let i = 0; i < this.nestRocks.length/2; i++)
             {
                 this.scene.pushMatrix();
-                this.scene.translate(Math.floor(Math.random() * 3), 0, Math.floor(Math.random() * 3));
+                this.scene.translate(this.nestRockPos[i][0], this.nestRockPos[i][1], this.nestRockPos[i][2]);
                 this.scene.scale(this.nestRocks[1][0], this.nestRocks[1][1], this.nestRocks[1][2]);
                 this.nestRocks[0].display();
                 this.scene.popMatrix();
