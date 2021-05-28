@@ -23,6 +23,7 @@ export class MyMovingFish extends MyMovingObject
         this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.ang, 0, 1, 0);
         this.model.display();
+        
         if(this.rockInMouth.length != 0)
         {
             
@@ -32,6 +33,11 @@ export class MyMovingFish extends MyMovingObject
         }
         
         this.scene.popMatrix();
+    }
+
+    clean_mouth()
+    {
+        this.rockInMouth = [];
     }
 
     animation()

@@ -135,7 +135,6 @@ export class MyMovingObject extends CGFobject {
                 mouth.push(rockArray[i]);
                 mouth.push(rockPosArray[i]);
                 mouth.push(rockScaleArray[i]);
-                mouth.push(i);
                 rockArray.splice(i, 1);
                 rockPosArray.splice(i, 1);
                 rockScaleArray.splice(i, 1);
@@ -157,6 +156,7 @@ export class MyMovingObject extends CGFobject {
         this.ang = 0;
         if(mouth.length != 0)
         {
+            /*
             this.rockMat = new CGFappearance(this.scene);
             this.rockMat.setAmbient(0.4, 0.4, 0.4, 1);
             this.rockMat.setDiffuse(0.4, 0.4, 0.4, 1);
@@ -170,11 +170,11 @@ export class MyMovingObject extends CGFobject {
             this.scene.scale(mouth[2][0], mouth[2][1], mouth[2][2]);
             this.mouth[0].display();
             this.scene.popMatrix();
+            */
             
             rockArray.push(mouth[0]);
             rockPosArray.push([mouth[1][0], mouth[1][1], mouth[1][2]]);
             rockScaleArray.push([mouth[2][0], mouth[2][1], mouth[2][2]]);
-            mouth = [];
         }
     }
     
