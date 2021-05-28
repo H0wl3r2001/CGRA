@@ -64,7 +64,7 @@ export class MyNest extends CGFobject{
                 
                 this.scene.pushMatrix();
                 this.scene.scale(this.nestRocks[i][1][0], this.nestRocks[i][1][1], this.nestRocks[i][1][2]);
-                this.scene.translate(this.nestRockPos[i][0], this.nestRockPos[i][1], this.nestRockPos[i][2]);
+                this.scene.translate(this.nestRockPos[i][0]-1, this.nestRockPos[i][1]-1, this.nestRockPos[i][2]-1);
                 this.nestRocks[i][0].display();
                 this.scene.popMatrix();
             }
