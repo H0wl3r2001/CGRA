@@ -1,5 +1,6 @@
 import { MyFish } from './MyFish.js';
 import { MyMovingObject } from './MyMovingObject.js';
+import {CGFappearance, CGFobject, CGFshader, CGFtexture} from '../lib/CGF.js';
 
 export class MyMovingFish extends MyMovingObject
 {
@@ -26,10 +27,19 @@ export class MyMovingFish extends MyMovingObject
         
         if(this.rockInMouth.length != 0)
         {
-            
-            this.scene.translate(0,0,2);
+            this.rockMat = new CGFappearance(this.scene);
+            this.rockMat.setAmbient(0.4, 0.4, 0.4, 1);
+            this.rockMat.setDiffuse(0.4, 0.4, 0.4, 1);
+            this.rockMat.setSpecular(0.4, 0.4, 0.4, 1);
+            this.rockMat.setShininess(120);
+
+            this.rockMat.apply();
+
+            this.scene.pushMatrix();
+            this.scene.translate(0,-1,1);
             this.scene.scale(this.rockInMouth[2][0], this.rockInMouth[2][1], this.rockInMouth[2][2])
             this.rockInMouth[0].display();
+            this.scene.popMatrix();
         }
         
         this.scene.popMatrix();
