@@ -26,7 +26,7 @@ export class MyNest extends CGFobject{
         
         for(let i = 0; i < 10; i++)
         {
-            this.nestRockPos.push([Math.random(), 0, Math.random()]);
+            this.nestRockPos.push([Math.random(), Math.random(), Math.random()]);
         }
     }
 
