@@ -47,11 +47,13 @@ export class MyNest extends CGFobject{
         this.scene.scale(2,2,2);
         this.nest.display();
 
+        this.scene.setActiveShader(this.scene.defaultShader);
+
         if(this.nestRocks.length != 0)
         {
             for(let i = 0; i < this.nestRocks.length; i++)
             {
-                /*
+                
                 this.rockMat = new CGFappearance(this.scene);
                 this.rockMat.setAmbient(0.4, 0.4, 0.4, 1);
                 this.rockMat.setDiffuse(0.4, 0.4, 0.4, 1);
@@ -59,7 +61,7 @@ export class MyNest extends CGFobject{
                 this.rockMat.setShininess(120);
                 
                 this.rockMat.apply(); //côr não corresponde ao normal das pedras.
-                */
+                
                 this.scene.pushMatrix();
                 this.scene.scale(this.nestRocks[i][1][0], this.nestRocks[i][1][1], this.nestRocks[i][1][2]);
                 this.scene.translate(this.nestRockPos[i][0], this.nestRockPos[i][1], this.nestRockPos[i][2]);
