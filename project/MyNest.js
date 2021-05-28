@@ -24,9 +24,9 @@ export class MyNest extends CGFobject{
         this.nestPos.push(-10,0.8,5);
         
         
-        for(let i = 0; i < 4; i++)
+        for(let i = 0; i < 10; i++)
         {
-            this.nestRockPos.push([Math.floor(Math.random() * 2), 0, Math.floor(Math.random() * 2)]);
+            this.nestRockPos.push([Math.random(), 0, Math.random()]);
         }
     }
 
@@ -45,9 +45,10 @@ export class MyNest extends CGFobject{
         this.scene.translate(this.nestPos[0], this.nestPos[1], this.nestPos[2]);
         this.scene.scale(2,2,2);
         this.nest.display();
+
         if(this.nestRocks.length != 0)
         {
-            for(let i = 0; i < this.nestRocks.length/2; i++)
+            for(let i = 0; i < this.nestRocks.length/2; i+=2)
             {
                 this.scene.pushMatrix();
                 this.scene.translate(this.nestRockPos[i][0], this.nestRockPos[i][1], this.nestRockPos[i][2]);
