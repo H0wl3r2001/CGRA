@@ -63,7 +63,7 @@ export class MyNest extends CGFobject{
                 this.rockMat.apply(); //côr não corresponde ao normal das pedras.
                 
                 this.scene.pushMatrix();
-                this.scene.scale(this.nestRocks[i][1][0], this.nestRocks[i][1][1], this.nestRocks[i][1][2]);
+                this.scene.scale(0.5*this.nestRocks[i][1][0], 0.5*this.nestRocks[i][1][1], 0.5*this.nestRocks[i][1][2]);
                 this.scene.translate(this.nestRockPos[i][0]-1, this.nestRockPos[i][1]-1, this.nestRockPos[i][2]-1);
                 this.nestRocks[i][0].display();
                 this.scene.popMatrix();
