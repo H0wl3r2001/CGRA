@@ -82,9 +82,11 @@ export class MyMovingFish extends MyMovingObject
         {
             if(Math.pow(rockPosArray[i][0]-this.x, 2) + Math.pow(rockPosArray[i][2]-this.z, 2) <= Math.pow(1.5,2))
             {
+                console.debug("before collect size: " + mouth.length);
                 mouth.push(rockArray[i]);
                 mouth.push(rockPosArray[i]);
                 mouth.push(rockScaleArray[i]);
+                console.debug("after collect size: " + mouth.length);
                 rockArray.splice(i, 1);
                 rockPosArray.splice(i, 1);
                 rockScaleArray.splice(i, 1);
@@ -97,7 +99,9 @@ export class MyMovingFish extends MyMovingObject
     {
         if(Math.pow(nestPos[0]-this.x, 2) + Math.pow(nestPos[2]-this.z, 2) <= Math.pow(2, 2))
         {
+            console.debug("before push size: " + nestRocks.length);
             nestRocks.push([mouth[0], mouth[2]]); //object and scale
+            console.debug("after push size: " + nestRocks.length);
 
             while(mouth.length > 0)
             {

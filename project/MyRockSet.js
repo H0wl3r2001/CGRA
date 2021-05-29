@@ -40,7 +40,6 @@ export class MyRockSet extends CGFobject{
     display()
     {
         this.rockMat.apply();
-        this.scene.pushMatrix();
         for(let i = 0; i < this.rocks.length; i++){
             this.scene.pushMatrix();
             this.scene.translate(this.rockPos[i][0], this.rockPos[i][1], this.rockPos[i][2]);
@@ -48,6 +47,5 @@ export class MyRockSet extends CGFobject{
             this.rocks[i].display();
             this.scene.popMatrix();
         }
-        this.scene.popMatrix(); 
     }
 }

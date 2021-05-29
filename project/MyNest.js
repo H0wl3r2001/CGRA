@@ -8,7 +8,7 @@ import {    MySphere    } from './MySphere.js';
  * @param scene - Reference to MyScene object
  */
 export class MyNest extends CGFobject{
-    constructor(scene){
+    constructor(scene, rockNum){
         super(scene);
         this.nest = new MySphere(this.scene, 16, 8);
         this.nestPos = [];
@@ -16,17 +16,20 @@ export class MyNest extends CGFobject{
         this.nestRockPos = [];
         this.nestShader = new CGFshader(this.scene.gl, "shader/nestShader.vert", "shader/nestShader.frag");
         this.initMaterials();
-        this.initPos();
+        this.initPos(rockNum);
     }
 
-    initPos()
+    initPos(rockNum)
     {
-        this.nestPos.push(-10,0.8,5);
-        
-        
-        for(let i = 0; i < 10; i++)
-        {
-            this.nestRockPos.push([Math.random(), Math.random(), Math.random()]);
+        this.nestPos.push(-10,1,5);
+        let rockY = 0;
+        for(let i = 0; i < rockNum; i++)
+        {   
+            let randX = (Math.random() * 8) - 4;
+            let randZ = (Math.random() * 8) - 4;
+            if(i % 15 == 0)
+                rockY += 0.5;
+            this.nestRockPos.push([randX, rockY, randZ]);
         }
     }
 

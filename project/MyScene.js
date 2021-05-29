@@ -72,6 +72,7 @@ export class MyScene extends CGFscene {
 
         this.texlists = [this.texture_test, this.texture_desert, this.texture_ocean];
         this.selectedTexture = 2;
+        // this.rockNum = 60;
 
         //Scene objects
         this.axis = new CGFaxis(this);
@@ -82,10 +83,10 @@ export class MyScene extends CGFscene {
         this.movingObject = new MyMovingObject(this,4,1,this.speedFactor);
         // this.fish = new MyFish(this, 16, 8);
         this.seaFloor = new MySeaFloor(this);
-        this.nest = new MyNest(this);
-        this.sky = new MySky(this);
-        this.rock = new MyRock(this, 16, 8); //Rock used for testing hypothesis
+        // this.rock = new MyRock(this, 16, 8); //Rock used for testing hypothesis
         this.rockSet = new MyRockSet(this, 60);
+        this.nest = new MyNest(this, 60);
+        this.sky = new MySky(this);
         this.algae = new MyAlgaeCluster(this, 50);
         this.pillarSet = new MyPillarSet(this);
         this.movingFish = new MyMovingFish(this, 16, 8, this.speedFactor);
@@ -117,7 +118,7 @@ export class MyScene extends CGFscene {
         this.displayMovingObject = false;
         this.displaySphere = false;
         this.displayCylinder = false;
-        this.fric = 0.005;
+        this.fric = 0.002;
         this.scaleFactor = 1;
     }
     initLights() {
@@ -144,7 +145,7 @@ export class MyScene extends CGFscene {
         //To be done...
         this.checkKeys();
         //---not in the specification:---
-        this.movingObject.friction();
+        this.movingFish.friction();
         //-------------------------------
         if(this.displayMovingObject)
             this.movingObject.update();
@@ -315,7 +316,7 @@ export class MyScene extends CGFscene {
                     this.movingFish.collect(this.rockSet.rocks, this.rockSet.rockPos, this.rockSet.rockScale, this.movingFish.rockInMouth);
                 }
                 else{
-                    if(this.nest.nestRocks.length < 10)
+                    if(this.nest.nestRocks.length < 60)
                         this.movingFish.putOnNest(this.movingFish.rockInMouth, this.nest.nestPos, this.nest.nestRocks);
                 }
             }
