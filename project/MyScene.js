@@ -12,6 +12,7 @@ import { MyRockSet } from "./MyRockSet.js";
 import {MyPillarSet} from "./MyPillarSet.js";
 import {MyAlgaeCluster} from "./MyAlgaeCluster.js";
 import { MyMovingFish } from "./MyMovingFish.js";
+import { MyAnimatedFish } from "./MyAnimatedFish.js";
 
 /**
 * MyScene
@@ -34,7 +35,8 @@ export class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
-        this.setUpdatePeriod(50);
+        this.updatePeriod = 50;
+        this.setUpdatePeriod(this.updatePeriod);
         
         this.enableTextures(true);
 
@@ -72,7 +74,9 @@ export class MyScene extends CGFscene {
 
         this.texlists = [this.texture_test, this.texture_desert, this.texture_ocean];
         this.selectedTexture = 2;
-        // this.rockNum = 60;
+        this.rockNum = 60;
+        this.algaeNum = 50;
+        this.lastFrameInstant = Date.now(); //get first frame instant
 
         //Scene objects
         this.axis = new CGFaxis(this);
@@ -83,12 +87,16 @@ export class MyScene extends CGFscene {
         // this.fish = new MyFish(this, 16, 8);
         this.seaFloor = new MySeaFloor(this);
         // this.rock = new MyRock(this, 16, 8); //Rock used for testing hypothesis
-        this.rockSet = new MyRockSet(this, 60);
-        this.nest = new MyNest(this, 60);
+        this.rockSet = new MyRockSet(this, this.rockNum);
+        this.nest = new MyNest(this, this.rockNum);
         this.sky = new MySky(this);
-        this.algae = new MyAlgaeCluster(this, 50);
+        this.algae = new MyAlgaeCluster(this, this.algaeNum);
         this.pillarSet = new MyPillarSet(this);
         this.movingFish = new MyMovingFish(this);
+        this.animFish = [
+            new MyAnimatedFish(this, [0,2,0], 2, this.updatePeriod),
+            new MyAnimatedFish(this, [10,2,10], 5, this.updatePeriod)
+        ]
 
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -144,6 +152,10 @@ export class MyScene extends CGFscene {
     update(t){
         //To be done...
         this.checkKeys();
+
+        //to avoid issues with variable framerate
+        var deltaTime = t - this.lastFrameInstant;
+
         //---not in the specification:---
         this.movingFish.friction();
         //-------------------------------
@@ -151,11 +163,16 @@ export class MyScene extends CGFscene {
             this.movingObject.update(this.speedFactor);
 
         // this.fish.animation();
-        this.movingFish.update(this.speedFactor);
+        this.movingFish.update(this.speedFactor, );
         this.movingFish.animation(this.speedFactor);
-
+        
+        for(let i = 0; i < this.animFish.length; i++){
+            this.animFish[i].update(this.speedFactor);
+            this.animFish[i].animation(this.speedFactor);
+        }
 
         this.sky.waterShader.setUniformsValues({ timeFactor: t % 100000 });
+        this.lastFrameInstant = t;
     }
 
     changeText()
@@ -214,6 +231,9 @@ export class MyScene extends CGFscene {
         this.translate(0, 2, 0);
         // this.fish.display();
         this.movingFish.display();
+        for(let i = 0; i < this.animFish.length; i++){
+            this.animFish[i].display();
+        }
         this.popMatrix();
 
         //reset scene appearance
@@ -319,7 +339,7 @@ export class MyScene extends CGFscene {
                     this.movingFish.collect(this.rockSet.rocks, this.rockSet.rockPos, this.rockSet.rockScale, this.movingFish.rockInMouth);
                 }
                 else{
-                    if(this.nest.nestRocks.length < 60)
+                    if(this.nest.nestRocks.length < this.rockNum)
                         this.movingFish.putOnNest(this.movingFish.rockInMouth, this.nest.nestPos, this.nest.nestRocks);
                 }
             }

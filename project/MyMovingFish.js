@@ -18,6 +18,16 @@ export class MyMovingFish extends MyMovingObject
         this.ang = 0;
     }
 
+    update(speedFactor){
+        super.update(speedFactor);
+        if(this.y < 0.0 || this.y > 5.0){   //for some reason I'm not entirely sure of, == 0.0/5.0 does not work
+            this.vY = 0;
+        }
+        //if we can move on the Y axis
+        if(this.y + this.vY*speedFactor > 0.0 && this.y + this.vY*speedFactor < 5.0)
+            this.y += this.vY*speedFactor;
+    }
+
     display()
     {
         this.scene.pushMatrix();
