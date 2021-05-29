@@ -94,7 +94,10 @@ export class MyScene extends CGFscene {
         this.movingFish = new MyMovingFish(this, false);
         this.animFish = [
             new MyAnimatedFish(this, [0,2,0], 2, true),
-            new MyAnimatedFish(this, [10,2,10], 5, true)
+            // new MyAnimatedFish(this, [10,2,10], 5, true),
+            // new MyAnimatedFish(this, [2,5,-10], 10, true),
+            // new MyAnimatedFish(this, [-5,4,0], 30, true),
+            new MyAnimatedFish(this, [3,2,5], 5, true)
         ]
 
         this.defaultAppearance = new CGFappearance(this);

@@ -23,8 +23,8 @@ export class MyAnimatedFish extends MyMovingObject
     }
 
     update(speedFactor, deltaTime){
+        this.ang += this.angIncrement * speedFactor * deltaTime;
         super.update(speedFactor, deltaTime);
-        this.ang += this.angIncrement * deltaTime;
     }
 
     display()
