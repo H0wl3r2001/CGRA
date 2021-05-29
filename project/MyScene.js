@@ -83,7 +83,7 @@ export class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this, 6);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.movingObject = new MyMovingObject(this, 4, 1, [0,0,0], 0.0);
-        // this.fish = new MyFish(this, 16, 8);
+        // this.fish = new MyFish(this, 16, 8, false);
         this.seaFloor = new MySeaFloor(this);
         // this.rock = new MyRock(this, 16, 8); //Rock used for testing hypothesis
         this.rockSet = new MyRockSet(this, this.rockNum);
@@ -91,10 +91,10 @@ export class MyScene extends CGFscene {
         this.sky = new MySky(this);
         this.algae = new MyAlgaeCluster(this, this.algaeNum);
         this.pillarSet = new MyPillarSet(this);
-        this.movingFish = new MyMovingFish(this);
+        this.movingFish = new MyMovingFish(this, false);
         this.animFish = [
-            new MyAnimatedFish(this, [0,2,0], 2),
-            new MyAnimatedFish(this, [10,2,10], 5)
+            new MyAnimatedFish(this, [0,2,0], 2, true),
+            new MyAnimatedFish(this, [10,2,10], 5, true)
         ]
 
         this.defaultAppearance = new CGFappearance(this);
@@ -272,16 +272,16 @@ export class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyW")){
             text+=" W ";
             if(this.displayMovingObject)
-                this.movingObject.accelerate(0.01);
-            this.movingFish.accelerate(0.01);
+                this.movingObject.accelerate(0.2);
+            this.movingFish.accelerate(0.2);
             keysPressed = true;
         }
 
         if(this.gui.isKeyPressed("KeyS")){
             text+= " S ";
             if(this.displayMovingObject)
-                this.movingObject.accelerate(-0.01);
-            this.movingFish.accelerate(-0.01);
+                this.movingObject.accelerate(-0.2);
+            this.movingFish.accelerate(-0.2);
             keysPressed = true;
         }
 

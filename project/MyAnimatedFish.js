@@ -3,10 +3,10 @@ import { MyMovingObject } from './MyMovingObject.js';
 
 export class MyAnimatedFish extends MyMovingObject
 {
-    constructor(scene, centre, duration) //Parâmetros do peixe: cor, rácio cabeça/corpo e textura(opcional)
+    constructor(scene, centre, duration, randomize) //Parâmetros do peixe: cor, rácio cabeça/corpo e textura(opcional)
     {
         super(scene, 4, 1);
-        this.model = new MyFish(scene, 16, 8);
+        this.model = new MyFish(scene, 16, 8, randomize);
         this.init_pos(centre, duration);
     }
 
@@ -36,9 +36,9 @@ export class MyAnimatedFish extends MyMovingObject
         this.scene.popMatrix();
     }
 
-    animation(deltaTime)
+    animation()
     {
-        this.model.animation(this.v * 5 * deltaTime, this.state);
+        this.model.animation(this.v / 5, this.state);
     }
   
     /**
@@ -48,5 +48,6 @@ export class MyAnimatedFish extends MyMovingObject
     reset(){
         //reset movement variables
         super.reset(this.originalPos, this.originalVel);
+        this.model.reset();
     }
 }

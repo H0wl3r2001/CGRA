@@ -4,10 +4,10 @@ import { CGFappearance } from '../lib/CGF.js';
 
 export class MyMovingFish extends MyMovingObject
 {
-    constructor(scene)
+    constructor(scene, randomize)
     {
         super(scene, 4, 1);
-        this.model = new MyFish(scene, 16, 8);
+        this.model = new MyFish(scene, 16, 8, randomize);
         this.rockInMouth = []; //0 will be the object; 1 will be the position; 2 will be the scale; 3 will be the original index of the rockSet.
     }
 
@@ -50,12 +50,7 @@ export class MyMovingFish extends MyMovingObject
             this.scene.translate(0,-1,0.75);
             this.scene.scale(this.rockInMouth[2][0], this.rockInMouth[2][1], this.rockInMouth[2][2])
             this.rockInMouth[0].display();
-            /*
-            while(this.rockInMouth.length > 0) //nem estando assim resolve
-            {
-                this.rockInMouth.pop();
-            }
-            */
+
             this.scene.popMatrix();
         }
         
@@ -117,9 +112,9 @@ export class MyMovingFish extends MyMovingObject
         }    
     }
 
-    animation(deltaTime)
+    animation()
     {
-        this.model.animation(this.v * 5 * deltaTime, this.state);
+        this.model.animation(this.v * 2, this.state);
     }
   
     /**
@@ -129,6 +124,7 @@ export class MyMovingFish extends MyMovingObject
     reset(rockArray, rockPosArray, rockScaleArray, mouth){
         //reset movement variables
         super.reset([0,0,0], 0.0);
+        this.model.reset();
 
         //reset gameplay variables
         if(mouth.length != 0)

@@ -5,7 +5,7 @@ import {MyTriangleBig} from './MyTriangleBig.js';
 
 export class MyFish extends CGFobject
 {
-    constructor(scene, slices, stacks)
+    constructor(scene, slices, stacks, randomize)
     {
         super(scene);
         this.body = new MySphere(scene, slices, stacks);
@@ -15,8 +15,8 @@ export class MyFish extends CGFobject
         this.leftFin = new MyTriangleSmall(scene);
         this.topFin = new MyTriangleSmall(scene);
         this.swimmerFin = new MyTriangleBig(scene);
+        this.initMaterials(randomize);
         this.initShaders();
-        this.initMaterials();
         this.anglBack = 0;
         this.anglSideR = 0;
         this.anglSideL = 0;
@@ -27,11 +27,18 @@ export class MyFish extends CGFobject
 
     initShaders(){
         this.bodyShader = new CGFshader(this.scene.gl, "shader/fishBody.vert", "shader/fishBody.frag");
+        this.bodyShader.setUniformsValues( {colorVals : this.rgbVals});
     }
     
-    initMaterials()
+    initMaterials(randomize)
     {
         this.fishBodyTex = new CGFtexture(this.scene, "images/scales.jpg");
+        this.rgbVals = [1,0,0,1];
+        if(randomize){
+            this.rgbVals[0] = Math.random();
+            this.rgbVals[1] = Math.random();
+            this.rgbVals[2] = Math.random();
+        }
 
         this.fishEye = new CGFappearance(this.scene);
         this.fishEye.setAmbient(1, 1, 1, 1);
@@ -42,9 +49,9 @@ export class MyFish extends CGFobject
         this.fishEye.setTextureWrap('REPEAT', 'REPEAT');
 
         this.fishFin = new CGFappearance(this.scene);
-        this.fishFin.setAmbient(1, 0, 0, 1);
-        this.fishFin.setDiffuse(1, 0, 0, 1);
-        this.fishFin.setSpecular(1, 0, 0, 1);
+        this.fishFin.setAmbient(this.rgbVals[0], this.rgbVals[1], this.rgbVals[2], 1);
+        this.fishFin.setDiffuse(this.rgbVals[0], this.rgbVals[1], this.rgbVals[2], 1);
+        this.fishFin.setSpecular(this.rgbVals[0], this.rgbVals[1], this.rgbVals[2], 1);
         this.fishFin.setShininess(120);
         this.fishFin.setTextureWrap('REPEAT', 'REPEAT');
     };
@@ -173,7 +180,16 @@ export class MyFish extends CGFobject
             this.anglSideL += this.directionSideL*2*(Math.PI/180) * (scale + 1); //one side does the opposite of the other
         }
 
-        this.anglBack += this.directionBack*3*(scale+1)*(Math.PI/180);
+        this.anglBack += this.directionBack*(scale+1)*(Math.PI/180);
         
+    }
+
+    reset(){
+        this.anglSideL = 0;
+        this.anglSideR = 0;
+        this.anglBack = 0;
+        this.directionBack = 1;
+        this.directionSideR = 1;
+        this.directionSideL = -1;
     }
 }
