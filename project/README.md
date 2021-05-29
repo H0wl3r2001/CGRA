@@ -20,34 +20,34 @@ Além disso, implementou-se uma classe própria para o ninho.
 ## Screenshots
 
 ### 1 - My Fish
-![Screenshot 1] (screenshots/proj-t05g03-1.png)
+![Screenshot1](screenshots/proj-t05g03-1.png)
 
 ### 2 - Sea Floor
 
-![Screenshot 2] (screenshots/proj-t05g03-2.png)
+![Screenshot2](screenshots/proj-t05g03-2.png)
 
 ### 3 - Water Map
 
-![Screenshot 3] (screenshots/proj-t05g03-3.png)
+![Screenshot3](screenshots/proj-t05g03-3.png)
 
 ### 4 - Rocks
 
-![Screenshot 4] (screenshots/proj-t05g03-4.png)
+![Screenshot4](screenshots/proj-t05g03-4.png)
 
 ### 5 - Pillars
 
-![Screenshot 5] (screenshots/proj-t05g03-5.png)
+![Screenshot5](screenshots/proj-t05g03-5.png)
 
 ### 6 - Extra map elements
 
-![Screenshot 6] (screenshots/proj-t05g03-6.png)
+![Screenshot6](screenshots/proj-t05g03-6.png)
 
 ### 7 - Fish movement (collect and dispose)
 
-![Screenshot 7a] (screenshots/proj-t05g03-7a.png)
-![Screenshot 7b] (screenshots/proj-t05g03-7b.png)
-![Screenshot 7c] (screenshots/proj-t05g03-7c.png)
+![Screenshot7a](screenshots/proj-t05g03-7a.png)
+![Screenshot7b](screenshots/proj-t05g03-7b.png)
+![Screenshot7c](screenshots/proj-t05g03-7c.png)
 
 ### 8 - Extras implemented (randomness in the Seaweed and rocks in the nest)
 
-![Screenshot 8] (screenshots/proj-t05g03-8.png)
+![Screenshot8](screenshots/proj-t05g03-8.png)
