@@ -3,32 +3,28 @@ import { MyMovingObject } from './MyMovingObject.js';
 
 export class MyAnimatedFish extends MyMovingObject
 {
-    constructor(scene, centre, duration, updatePeriod) //Parâmetros do peixe: cor, rácio cabeça/corpo e textura(opcional)
+    constructor(scene, centre, duration) //Parâmetros do peixe: cor, rácio cabeça/corpo e textura(opcional)
     {
         super(scene, 4, 1);
         this.model = new MyFish(scene, 16, 8);
-        this.init_pos(centre, duration, updatePeriod);
+        this.init_pos(centre, duration);
     }
 
-    init_pos(centre, duration, updatePeriod){
+    init_pos(centre, duration){
         let radius = 5;
+        this.originalPos = [centre[0] + radius, centre[1], centre[2]];
         this.x = centre[0] + radius;
         this.y = centre[1];
         this.z = centre[2];
         this.ang = 0;
-        this.angIncrement = 2*Math.PI/duration / updatePeriod;
-        this.v = this.angIncrement*radius;
+        this.angIncrement = 2*Math.PI/duration;
+        this.originalVel = this.angIncrement*radius;
+        this.v = this.originalVel;
     }
 
-    update(speedFactor){
-        super.update(speedFactor);
-        if(this.y < 0.0 || this.y > 5.0){   //for some reason I'm not entirely sure of, == 0.0/5.0 does not work
-            this.vY = 0;
-        }
-        //if we can move on the Y axis
-        if(this.y + this.vY*speedFactor > 0.0 && this.y + this.vY*speedFactor < 5.0)
-            this.y += this.vY*speedFactor;
-        this.ang += this.angIncrement;
+    update(speedFactor, deltaTime){
+        super.update(speedFactor, deltaTime);
+        this.ang += this.angIncrement * deltaTime;
     }
 
     display()
@@ -40,9 +36,9 @@ export class MyAnimatedFish extends MyMovingObject
         this.scene.popMatrix();
     }
 
-    animation()
+    animation(deltaTime)
     {
-        this.model.animation(this.v * 5, this.state);
+        this.model.animation(this.v * 5 * deltaTime, this.state);
     }
   
     /**
@@ -51,6 +47,6 @@ export class MyAnimatedFish extends MyMovingObject
      */
     reset(){
         //reset movement variables
-        super.reset();
+        super.reset(this.originalPos, this.originalVel);
     }
 }

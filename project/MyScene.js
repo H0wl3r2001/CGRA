@@ -35,8 +35,7 @@ export class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
-        this.updatePeriod = 50;
-        this.setUpdatePeriod(this.updatePeriod);
+        this.setUpdatePeriod(50);
         
         this.enableTextures(true);
 
@@ -83,7 +82,7 @@ export class MyScene extends CGFscene {
         this.skyBox = new MyCubeMap(this, this.texlists[this.selectedTexture]);
         this.cylinder = new MyCylinder(this, 6);
         this.incompleteSphere = new MySphere(this, 16, 8);
-        this.movingObject = new MyMovingObject(this,4,1);
+        this.movingObject = new MyMovingObject(this, 4, 1, [0,0,0], 0.0);
         // this.fish = new MyFish(this, 16, 8);
         this.seaFloor = new MySeaFloor(this);
         // this.rock = new MyRock(this, 16, 8); //Rock used for testing hypothesis
@@ -94,8 +93,8 @@ export class MyScene extends CGFscene {
         this.pillarSet = new MyPillarSet(this);
         this.movingFish = new MyMovingFish(this);
         this.animFish = [
-            new MyAnimatedFish(this, [0,2,0], 2, this.updatePeriod),
-            new MyAnimatedFish(this, [10,2,10], 5, this.updatePeriod)
+            new MyAnimatedFish(this, [0,2,0], 2),
+            new MyAnimatedFish(this, [10,2,10], 5)
         ]
 
         this.defaultAppearance = new CGFappearance(this);
@@ -154,21 +153,21 @@ export class MyScene extends CGFscene {
         this.checkKeys();
 
         //to avoid issues with variable framerate
-        var deltaTime = t - this.lastFrameInstant;
+        var deltaTime = (t - this.lastFrameInstant)/1000;
 
         //---not in the specification:---
-        this.movingFish.friction();
+        this.movingFish.friction(deltaTime);
         //-------------------------------
         if(this.displayMovingObject)
-            this.movingObject.update(this.speedFactor);
+            this.movingObject.update(this.speedFactor, deltaTime);
 
         // this.fish.animation();
-        this.movingFish.update(this.speedFactor, );
-        this.movingFish.animation(this.speedFactor);
+        this.movingFish.update(this.speedFactor, deltaTime);
+        this.movingFish.animation(this.speedFactor, deltaTime);
         
         for(let i = 0; i < this.animFish.length; i++){
-            this.animFish[i].update(this.speedFactor);
-            this.animFish[i].animation(this.speedFactor);
+            this.animFish[i].update(this.speedFactor, deltaTime);
+            this.animFish[i].animation(this.speedFactor, deltaTime);
         }
 
         this.sky.waterShader.setUniformsValues({ timeFactor: t % 100000 });
@@ -325,9 +324,13 @@ export class MyScene extends CGFscene {
         if(this.gui.isKeyPressed("KeyR")){
             text += " R ";
             if(this.displayMovingObject)
-                this.movingObject.reset(this.rockSet.rocks, this.rockSet.rockPos, this.rockSet.rockScale, this.movingFish.rockInMouth);
+                this.movingObject.reset([0,0,0]);
             this.movingFish.reset(this.rockSet.rocks, this.rockSet.rockPos, this.rockSet.rockScale, this.movingFish.rockInMouth);
-            this.movingFish.clean_mouth();
+
+            for(let i = 0; i < this.animFish.length; i++){
+                this.animFish[i].reset();
+            }
+
             keysPressed = true;
         }
 

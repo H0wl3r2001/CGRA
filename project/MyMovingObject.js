@@ -21,6 +21,7 @@ export class MyMovingObject extends CGFobject {
         this.state = 0; //0 if still, 1 if left-turning, 2 if right turning
         this.initBuffers();
     }
+    
     initBuffers() {
         this.vertices = [];
         this.indices = [];
@@ -85,9 +86,9 @@ export class MyMovingObject extends CGFobject {
         this.initNormalVizBuffers();
     }
 
-    update(speedFactor){
-        this.x += this.v*speedFactor*Math.sin(this.ang);
-        this.z += this.v*speedFactor*Math.cos(this.ang);
+    update(speedFactor, deltaTime){
+        this.x += this.v*speedFactor*Math.sin(this.ang) * deltaTime;
+        this.z += this.v*speedFactor*Math.cos(this.ang) * deltaTime;
     }
 
     turn(val){
@@ -113,21 +114,21 @@ export class MyMovingObject extends CGFobject {
      * Must return a hypothetical rock in the fish's mouth to its original position.
      * @param {*} mouth - an array that contains the object, the original position, the scale and the original index of the rockSet.
      */
-    reset(){
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
-        this.v = 0;
+    reset(originalPos, originalVel){
+        this.x = originalPos[0];
+        this.y = originalPos[1];
+        this.z = originalPos[2];
+        this.v = originalVel;
         this.vY = 0;
         this.ang = 0;
     }
     
     //---not in the specification:---
-    friction(){
+    friction(deltaTime){
         if(this.v == 0)
             return;
 
-        this.v = (this.v > 0) ? (this.v - this.scene.fric) : (this.v + this.scene.fric);
+        this.v = (this.v > 0) ? (this.v - this.scene.fric * deltaTime) : (this.v + this.scene.fric * deltaTime);
     }
     //-------------------------------
 }

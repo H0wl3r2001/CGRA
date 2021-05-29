@@ -12,20 +12,21 @@ export class MyMovingFish extends MyMovingObject
     }
 
     init_pos(){
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
+        this.originalPos = [0,0,0];
+        this.x = originalPos[0];
+        this.y = originalPos[1];
+        this.z = originalPos[2];
         this.ang = 0;
     }
 
-    update(speedFactor){
-        super.update(speedFactor);
+    update(speedFactor, deltaTime){
+        super.update(speedFactor, deltaTime);
         if(this.y < 0.0 || this.y > 5.0){   //for some reason I'm not entirely sure of, == 0.0/5.0 does not work
             this.vY = 0;
         }
         //if we can move on the Y axis
-        if(this.y + this.vY*speedFactor > 0.0 && this.y + this.vY*speedFactor < 5.0)
-            this.y += this.vY*speedFactor;
+        if(this.y + this.vY*speedFactor*deltaTime > 0.0 && this.y + this.vY*speedFactor*deltaTime < 5.0)
+            this.y += this.vY*speedFactor*deltaTime;
     }
 
     display()
@@ -116,9 +117,9 @@ export class MyMovingFish extends MyMovingObject
         }    
     }
 
-    animation()
+    animation(deltaTime)
     {
-        this.model.animation(this.v * 5, this.state);
+        this.model.animation(this.v * 5 * deltaTime, this.state);
     }
   
     /**
@@ -127,7 +128,7 @@ export class MyMovingFish extends MyMovingObject
      */
     reset(rockArray, rockPosArray, rockScaleArray, mouth){
         //reset movement variables
-        super.reset();
+        super.reset([0,0,0], 0.0);
 
         //reset gameplay variables
         if(mouth.length != 0)
@@ -141,5 +142,7 @@ export class MyMovingFish extends MyMovingObject
         {
             mouth.pop();
         }
+        
+        this.clean_mouth();
     }
 }

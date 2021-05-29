@@ -7,7 +7,7 @@
 | Mário Travassos | 201905871 | up201905871@fe.up.pt |
 
 ## Project Notes
-Dos pontos extras, o nosso grupo implementou com sucesso os pontos 7.1 e 7.3.
+No que toca às funcionalidades adicionais, o nosso grupo implementou com sucesso aquelas descritas nos pontos 7.1, 7.3 e 7.5 da proposta do projeto.
 
 Além disso, implementou-se uma classe própria para o ninho. 
 
