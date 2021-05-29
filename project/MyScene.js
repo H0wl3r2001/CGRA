@@ -12,7 +12,6 @@ import { MyRockSet } from "./MyRockSet.js";
 import {MyPillarSet} from "./MyPillarSet.js";
 import {MyAlgaeCluster} from "./MyAlgaeCluster.js";
 import { MyMovingFish } from "./MyMovingFish.js";
-import { MyAnimatedFish } from "./MyAnimatedFish.js";
 
 /**
 * MyScene
@@ -80,7 +79,6 @@ export class MyScene extends CGFscene {
         this.skyBox = new MyCubeMap(this, this.texlists[this.selectedTexture]);
         this.cylinder = new MyCylinder(this, 6);
         this.incompleteSphere = new MySphere(this, 16, 8);
-        this.speedFactor = 1;
         this.movingObject = new MyMovingObject(this,4,1);
         // this.fish = new MyFish(this, 16, 8);
         this.seaFloor = new MySeaFloor(this);
@@ -91,10 +89,6 @@ export class MyScene extends CGFscene {
         this.algae = new MyAlgaeCluster(this, 50);
         this.pillarSet = new MyPillarSet(this);
         this.movingFish = new MyMovingFish(this);
-        this.animFish = [
-            new MyAnimatedFish(this, [0,2,0], 2),
-            new MyAnimatedFish(this, [10,2,10], 5)
-        ]
 
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -125,6 +119,7 @@ export class MyScene extends CGFscene {
         this.displayCylinder = false;
         this.fric = 0.002;
         this.scaleFactor = 1;
+        this.speedFactor = 1;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -192,8 +187,14 @@ export class MyScene extends CGFscene {
         //setActiveShader function is very slow
         //and may cause performance issues
 
+
         //---OBJECTS NOT USING SHADERS---
         this.skyBox.display();
+        
+        //apply scale factor on the entire scene except the skybox
+        this.pushMatrix();
+        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+
         //this.rock.display();
         this.rockSet.display();
         this.pillarSet.display();
@@ -233,13 +234,10 @@ export class MyScene extends CGFscene {
             this.cylinder.display();
         }
 
-        this.pushMatrix();
         this.translate(this.movingObject.x, this.movingObject.y, this.movingObject.z);
         this.rotate(this.movingObject.ang,0, 1, 0);
         this.rotate(Math.PI/2,1,0,0);
         if(this.displayMovingObject){
-            this.pushMatrix();
-            this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
             this.movingObject.display();
         }
         this.popMatrix();
