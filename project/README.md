@@ -44,4 +44,5 @@ Além disso, implementou-se uma classe própria para o ninho.
 
 ### 8 - Extras implemented (randomness in the Seaweed and rocks in the nest)
 
-![Screenshot8](screenshots/proj-t05g03-8.png)
+![Screenshot8a](screenshots/proj-t05g03-8a.png)
+![Screenshot8b](screenshots/proj-t05g03-8b.png)
