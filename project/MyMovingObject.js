@@ -115,71 +115,18 @@ export class MyMovingObject extends CGFobject {
     accelerateY(val){
         this.vY = val;
     }
-
-     /**
-     * checks if a rock is 1.5 units away from fish and if it is, puts that rock in the vector that will disply it in the mouth,
-     * and also eliminates that same rock from all the arrays that have its info on the rockSet
-     * @param {*} rockArray - The array that contains all the rocks from a set.
-     * @param {*} rockPosArray - The array that contains all the rocks's initial positions from a set.
-     * @param {*} rockScaleArray - The array that contains all the rocks's scales from a set.
-     */
-    collect(rockArray, rockPosArray, rockScaleArray, mouth)
-    {
-        for(let i = 0; i < rockArray.length; i++)
-        {
-            var rockX = rockPosArray[i][0];
-            var rockZ = rockPosArray[i][2];
-            if(Math.pow(rockPosArray[i][0]-this.x, 2) + Math.pow(rockPosArray[i][2]-this.z, 2) <= Math.pow(1.5,2))
-            {
-                console.debug("inside");
-                mouth.push(rockArray[i]);
-                mouth.push(rockPosArray[i]);
-                mouth.push(rockScaleArray[i]);
-                rockArray.splice(i, 1);
-                rockPosArray.splice(i, 1);
-                rockScaleArray.splice(i, 1);
-                break;
-            }
-        }
-    }
   
     /**
      * Must return a hypothetical rock in the fish's mouth to its original position.
      * @param {*} mouth - an array that contains the object, the original position, the scale and the original index of the rockSet.
      */
-    reset(rockArray, rockPosArray, rockScaleArray, mouth){
+    reset(){
         this.x = 0;
         this.y = 0;
         this.z = 0;
         this.v = 0;
         this.vY = 0;
         this.ang = 0;
-        if(mouth.length != 0)
-        {
-            rockArray.push(mouth[0]);
-            rockPosArray.push([mouth[1][0], mouth[1][1], mouth[1][2]]);
-            rockScaleArray.push([mouth[2][0], mouth[2][1], mouth[2][2]]);
-        }
-        
-        
-        while(mouth.length > 0)
-        {
-            mouth.pop();
-        }
-    }
-
-    putOnNest(mouth, nestPos, nestRocks)
-    {
-        if(Math.pow(nestPos[0]-this.x, 2) + Math.pow(nestPos[2]-this.z, 2) <= Math.pow(2, 2))
-        {
-            nestRocks.push([mouth[0], mouth[2]]); //object and scale
-        }
-
-        while(mouth.length > 0)
-        {
-            mouth.pop();
-        }
-            
     }
     
     //---not in the specification:---

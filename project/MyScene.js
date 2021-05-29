@@ -310,27 +310,17 @@ export class MyScene extends CGFscene {
         if(this.gui.isKeyPressed("KeyC"))
         {
             text += " C ";
-            if(this.movingFish.y < 0.1 && this.movingFish.rockInMouth.length == 0)
-            {
-                this.movingFish.collect(this.rockSet.rocks, this.rockSet.rockPos, this.rockSet.rockScale, this.movingFish.rockInMouth);
+            if(this.movingFish.y < 0.001){
+                if(this.movingFish.rockInMouth.length == 0){
+                    this.movingFish.collect(this.rockSet.rocks, this.rockSet.rockPos, this.rockSet.rockScale, this.movingFish.rockInMouth);
+                }
+                else{
+                    if(this.nest.nestRocks.length < 10)
+                        this.movingFish.putOnNest(this.movingFish.rockInMouth, this.nest.nestPos, this.nest.nestRocks);
+                }
             }
 
             keysPressed = true;
-        }
-
-        if(this.gui.isKeyPressed("KeyT"))
-        {
-            text += " T ";
-
-            if(this.movingFish.y < 0.1 && this.movingFish.rockInMouth.length != 0)
-            {
-                if(this.nest.nestRocks.length < 10)
-                    this.movingFish.putOnNest(this.movingFish.rockInMouth, this.nest.nestPos, this.nest.nestRocks);
-                //this.movingFish.clean_mouth();
-            }
-
-            keysPressed = true;
-
         }
 
         if(keysPressed)
