@@ -12,6 +12,7 @@ import { MyRockSet } from "./MyRockSet.js";
 import {MyPillarSet} from "./MyPillarSet.js";
 import {MyAlgaeCluster} from "./MyAlgaeCluster.js";
 import { MyMovingFish } from "./MyMovingFish.js";
+import { MyAnimatedFish } from "./MyAnimatedFish.js";
 
 /**
 * MyScene
@@ -80,7 +81,7 @@ export class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this, 6);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.speedFactor = 1;
-        this.movingObject = new MyMovingObject(this,4,1,this.speedFactor);
+        this.movingObject = new MyMovingObject(this,4,1);
         // this.fish = new MyFish(this, 16, 8);
         this.seaFloor = new MySeaFloor(this);
         // this.rock = new MyRock(this, 16, 8); //Rock used for testing hypothesis
@@ -89,7 +90,11 @@ export class MyScene extends CGFscene {
         this.sky = new MySky(this);
         this.algae = new MyAlgaeCluster(this, 50);
         this.pillarSet = new MyPillarSet(this);
-        this.movingFish = new MyMovingFish(this, 16, 8, this.speedFactor);
+        this.movingFish = new MyMovingFish(this);
+        this.animFish = [
+            new MyAnimatedFish(this, [0,2,0], 2),
+            new MyAnimatedFish(this, [10,2,10], 5)
+        ]
 
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -148,11 +153,11 @@ export class MyScene extends CGFscene {
         this.movingFish.friction();
         //-------------------------------
         if(this.displayMovingObject)
-            this.movingObject.update();
+            this.movingObject.update(this.speedFactor);
 
         // this.fish.animation();
-        this.movingFish.update();
-        this.movingFish.animation();
+        this.movingFish.update(this.speedFactor);
+        this.movingFish.animation(this.speedFactor);
 
 
         this.sky.waterShader.setUniformsValues({ timeFactor: t % 100000 });

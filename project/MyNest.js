@@ -1,5 +1,4 @@
 import {CGFappearance, CGFobject, CGFshader, CGFtexture} from '../lib/CGF.js';
-import {   MyCylinder  } from './MyCylinder.js';
 import {    MySphere    } from './MySphere.js';
 
 /**

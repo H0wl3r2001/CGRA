@@ -8,13 +8,12 @@ import { MyRock } from './MyRock.js';
  * @param stacks - number of divisions along the Y axis
 */
 export class MyMovingObject extends CGFobject {
-    constructor(scene, slices, stacks, speedFactor) {
+    constructor(scene, slices, stacks) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
         this.v = 0.0;
         this.vY = 0.0;
-        this.speedFactor = speedFactor;
         this.x = 0.0;
         this.y = 0.0;
         this.z = 0.0;
@@ -86,15 +85,15 @@ export class MyMovingObject extends CGFobject {
         this.initNormalVizBuffers();
     }
 
-    update(){
+    update(speedFactor){
         if(this.y < 0.0 || this.y > 5.0){   //for some reason I'm not entirely sure of, == 0.0/5.0 does not work
             this.vY = 0;
         }
-        this.x += this.v*this.speedFactor*Math.sin(this.ang);
+        this.x += this.v*speedFactor*Math.sin(this.ang);
         //if we can move on the Y axis
-        if(this.y + this.vY*this.speedFactor > 0.0 && this.y + this.vY*this.speedFactor < 5.0)
-            this.y += this.vY*this.speedFactor;
-        this.z += this.v*this.speedFactor*Math.cos(this.ang);
+        if(this.y + this.vY*speedFactor > 0.0 && this.y + this.vY*speedFactor < 5.0)
+            this.y += this.vY*speedFactor;
+        this.z += this.v*speedFactor*Math.cos(this.ang);
     }
 
     turn(val){
